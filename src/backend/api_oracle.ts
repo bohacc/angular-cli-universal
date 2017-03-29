@@ -1,4 +1,5 @@
-var oracle = require('oracledb'),
+var
+  oracle = require('oracledb'),
   Promise = require('promise'),
   fs = require('fs');
 
@@ -8,7 +9,7 @@ export module Oracledb {
   export function select(sql, vals, req, connectData, obj) {
     return new Promise(function (resolve, reject) {
       console.log('SELECT - FCE');
-      console.log(oracle);
+      //console.log(oracle);
       //console.log(Promise);
       oracle.fetchAsString = [ oracle.CLOB ];
       // connection instance to database from obj

@@ -12,7 +12,7 @@ import { MainComponent } from '../components/main/main.component';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/first';
 
-export function boot(state: TransferState, applicationRef: ApplicationRef) {
+/*export function boot(state: TransferState, applicationRef: ApplicationRef) {
   return function () {
     applicationRef.isStable
       .filter((stable: boolean) => stable)
@@ -21,7 +21,7 @@ export function boot(state: TransferState, applicationRef: ApplicationRef) {
         state.inject();
       });
   };
-}
+}*/
 
 @NgModule({
   imports: [
@@ -29,14 +29,14 @@ export function boot(state: TransferState, applicationRef: ApplicationRef) {
         appId: 'cli-universal'
     }),
     ServerModule,
-    ServerTransferStateModule,
+    //ServerTransferStateModule,
     AppModule
   ],
   bootstrap: [
     MainComponent
   ],
   providers: [
-    {
+    /*{
       provide: APP_BOOTSTRAP_LISTENER,
       multi: true,
       useFactory: boot,
@@ -44,7 +44,7 @@ export function boot(state: TransferState, applicationRef: ApplicationRef) {
         TransferState,
         ApplicationRef
       ]
-    },
+    },*/
     { provide: 'isBrowser', useValue: false },
     { provide: 'isServer', useValue: true },
   ]

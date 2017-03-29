@@ -134,6 +134,15 @@ app.get('/products/:id/product-list/pdf', api.productDataListPdf);
 app.post('/assist/message', api.assistMessage);
 app.post('/lost-password', api.lostPassword);
 
+
+app.get('/data', (req, res) => {
+  // tslint:disable-next-line:no-console
+  console.time(`GET: ${req.originalUrl}`);
+  res.json({greeting: 'greeting', name: 'name'});
+  // tslint:disable-next-line:no-console
+  console.timeEnd(`GET: ${req.originalUrl}`);
+});
+
 let ngApp = (req, res) => {
   res.render('index', {
     req: req,
@@ -167,13 +176,6 @@ app.get('*', function(req, res) {
   });
 });*/
 
-/*app.get('/data', (req, res) => {
-  // tslint:disable-next-line:no-console
-  console.time(`GET: ${req.originalUrl}`);
-  res.json(api.getData());
-  // tslint:disable-next-line:no-console
-  console.timeEnd(`GET: ${req.originalUrl}`);
-});*/
 
 app.listen(port, () => {
   console.log(`Listening at ${baseUrl}`);

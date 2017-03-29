@@ -18,7 +18,7 @@ import { HomeViewComponent } from '../components/home/home.component';
     CommonModule,
     FormsModule,
     HttpModule,
-    TransferHttpModule,
+    //TransferHttpModule,
     RouterModule.forRoot([
       {
         path: '',

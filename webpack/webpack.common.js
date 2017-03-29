@@ -9,14 +9,14 @@ const { LoaderOptionsPlugin } = require("webpack");
 const { GlobCopyWebpackPlugin, BaseHrefWebpackPlugin } = require("@angular/cli/plugins/webpack");
 const { AotPlugin } = require("@ngtools/webpack");
 
-var oracledblib = require('oracledb');
+//var oracledblib = require('oracledb');
 
 module.exports = {
   "devtool": "source-map",
   "resolve": {
     "extensions": [
       ".ts",
-      ".js"
+      ".js",
     ],
     "modules": [
       "./node_modules"
@@ -217,10 +217,5 @@ module.exports = {
     "module": false,
     "clearImmediate": false,
     "setImmediate": false
-  },
-  externals: [
-    {
-      "oracledb": oracledblib
-    }
-  ]
+  }
 };

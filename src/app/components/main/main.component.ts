@@ -8,9 +8,9 @@ import { TransferState } from '../../modules/transfer-state/transfer-state';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  constructor(private transferState: TransferState) {}
+  constructor(/*private transferState: TransferState*/) {}
 
   ngOnInit(): void {
-    this.transferState.set('cached', true);
+    //this.transferState.set('cached', true);
   }
 }

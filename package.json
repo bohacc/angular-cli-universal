@@ -115,5 +115,9 @@
   "pre-commit": "lint-staged",
   "stylelint": {
     "extends": "stylelint-config-standard"
+  },
+  "browser": {
+    "oracle": false,
+    "oracledb": false
   }
 }
