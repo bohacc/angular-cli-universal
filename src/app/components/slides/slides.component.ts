@@ -13,7 +13,7 @@ export class SlidesComponent implements OnInit {
 
   ngOnInit() {
     if (this.isBrowser) {
-      $(require('../../../tools/js/jquery/slideshow/jquery.slides.js'));
+      $(require('../../../../tools/js/jquery/slideshow/jquery.slides.js'));
       let count = $(this._elRef.nativeElement).find('.item').length;
 
       $(this._elRef.nativeElement).slidesjs({

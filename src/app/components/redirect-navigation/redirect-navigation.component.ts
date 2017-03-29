@@ -7,7 +7,7 @@ declare var $: any;
 
 @Component({
   selector: 'redirect-navigation',
-  templateUrl: '../../../templates/a_6363.html',
+  templateUrl: '../../../../templates/a_6363.html',
 })
 
 export class RedirectNavigation implements AfterViewInit {

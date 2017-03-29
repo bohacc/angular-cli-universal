@@ -28,9 +28,6 @@ module.exports = {
 
 // Helpers
 function checkNodeImport(context, request, cb) {
-  console.log('context: ' + context);
-  console.log('request: ' + request);
-  console.log('cb: ' + cb);
   if (request != 'oracledb') {
     cb();
     return;

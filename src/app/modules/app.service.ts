@@ -1,5 +1,5 @@
 //noinspection TypeScriptUnresolvedFunction
-let Constants = require('../backend/constants');
+let Constants = require('../../backend/constants');
 
 import {Inject, Injectable} from '@angular/core';
 
@@ -8,8 +8,8 @@ import { IListFilter } from '../components/list-filter/list-filter.interface';
 
 @Injectable()
 export class AppService {
-  static instance:AppService;
-  static isCreating:boolean = false;
+  static instance: AppService;
+  static isCreating: boolean = false;
   store: any;
   @Inject('isBrowser') private isBrowser: Boolean;
 

@@ -17,7 +17,7 @@ export class Carousel {
 
   init() {
     if (this.isBrowser) {
-      $(require('../../../tools/js/jquery/carousel/slick.min.js'));
+      $(require('../../../../tools/js/jquery/carousel/slick.min.js'));
       $(this._elRef.nativeElement).slick({
         slidesToShow: 5,
         slidesToScroll: 1,

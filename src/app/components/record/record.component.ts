@@ -13,7 +13,7 @@ declare var $: any;
   templateUrl: 'record.template.html',
 })
 
-export class Record {
+export class RecordProduct {
   product: any = {};
   appService: AppService;
   toolsService: ToolsService;

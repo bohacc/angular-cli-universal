@@ -1,5 +1,5 @@
 import { ModuleWithProviders } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
 
 import { Home } from '../components/home_new/home.component';
 
@@ -20,4 +20,11 @@ export const appRoutingProviders: any[] = [
 
 ];
 
-export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
+export const routing: ModuleWithProviders = RouterModule.forRoot(
+  appRoutes,
+  {
+    useHash: false,
+    preloadingStrategy: PreloadAllModules,
+    initialNavigation: 'enabled'
+  }
+);

@@ -8,7 +8,7 @@ import { SideMenu } from '../../services/side-menu.service';
 
 @Component({
   selector: 'shop-categories-at',
-  templateUrl: '../../../templates/a_6802.html',
+  templateUrl: '../../../../templates/a_6802.html',
 })
 
 export class ShopCategoriesAt implements OnInit, SideMenu{

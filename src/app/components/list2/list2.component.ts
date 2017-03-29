@@ -27,11 +27,11 @@ export class List2 {
   ngOnInit() {
     if (this.isBrowser) {
       //noinspection TypeScriptUnresolvedFunction
-      $(require('../../../tools/js/jquery/ui/ui.product.img.previews.js'));
+      $(require('../../../../tools/js/jquery/ui/ui.product.img.previews.js'));
       //noinspection TypeScriptUnresolvedFunction
-      $(require('../../../tools/js/jquery/ui/ui.vertical.img.previews.js'));
+      $(require('../../../../tools/js/jquery/ui/ui.vertical.img.previews.js'));
       //noinspection TypeScriptUnresolvedFunction
-      $(require('../../../tools/js/jquery/ui/ui.product.img.lightbox.js'));
+      $(require('../../../../tools/js/jquery/ui/ui.product.img.lightbox.js'));
     }
     this.getData();
   }

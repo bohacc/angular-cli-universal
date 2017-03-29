@@ -36,7 +36,7 @@ export class Slider {
 
   init() {
     if (this.isBrowser) {
-      $(require('../../../tools/js/jquery/jquery-ui.min'));
+      $(require('../../../../tools/js/jquery/jquery-ui.min'));
       let _this = this;
       let options = {
         ranger: $(this._elRef.nativeElement).find('.slider_lenght'),

@@ -15,7 +15,7 @@ export class CarouselPartners implements OnInit {
   ngOnInit() {
     if (this.isBrowser) {
       //noinspection TypeScriptUnresolvedFunction
-      $(require('../../../tools/js/jquery/carousel/slick.min.js'));
+      $(require('../../../../tools/js/jquery/carousel/slick.min.js'));
     }
   }
 
@@ -27,7 +27,7 @@ export class CarouselPartners implements OnInit {
 
   setCarousel() {
     if (this.isBrowser) {
-      //$(require('../../../tools/js/jquery/carousel/slick.min.js'));
+      //$(require('../../../../tools/js/jquery/carousel/slick.min.js'));
 
       $(this._elRef.nativeElement).slick({
         slidesToShow: 4,

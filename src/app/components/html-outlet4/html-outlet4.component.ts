@@ -76,7 +76,7 @@ export class HtmlOutlet4 {
           //$(this._elRef.nativeElement).find('.js-default').addClass('hide');
           this.isLoaded = true;
 
-          $(require('../../../tools/js/jquery/slideshow/jquery.slides.js'));
+          $(require('../../../../tools/js/jquery/slideshow/jquery.slides.js'));
           let count = $(this._elRef.nativeElement).find('.slides').find('.item').length;
           $(this._elRef.nativeElement).find('.slides').slidesjs({
             width: "100%",

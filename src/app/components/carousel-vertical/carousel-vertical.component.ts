@@ -14,13 +14,13 @@ export class CarouselVertical implements OnInit {
   ngOnInit() {
     if (this.isBrowser) {
       //noinspection TypeScriptUnresolvedFunction
-      $(require('../../../tools/js/jquery/ui/ui.product.img.previews.js'));
+      $(require('../../../../tools/js/jquery/ui/ui.product.img.previews.js'));
       //noinspection TypeScriptUnresolvedFunction
-      $(require('../../../tools/js/jquery/ui/ui.vertical.img.previews.js'));
-      //$(require('../../../tools/js/jquery/ui/ui.product.img.lightbox.js'));
+      $(require('../../../../tools/js/jquery/ui/ui.vertical.img.previews.js'));
+      //$(require('../../../../tools/js/jquery/ui/ui.product.img.lightbox.js'));
 
       //noinspection TypeScriptUnresolvedFunction
-      $(require('../../../tools/js/jquery/carousel/slick.min.js'));
+      $(require('../../../../tools/js/jquery/carousel/slick.min.js'));
 
       // .vertical_gallery_list .content
       $(this._elRef.nativeElement).slick({

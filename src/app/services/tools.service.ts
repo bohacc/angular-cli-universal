@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 
 //import { isBrowser } from 'angular2-universal';
 import {AppService} from "../modules/app.service";
-let Constants = require('../../../backend/constants');
+let Constants = require('../../backend/constants');
 
 declare var $: any;
 

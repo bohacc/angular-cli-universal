@@ -7,7 +7,7 @@ import {Partners} from "../partners/partners.component";
 import {LoginPage} from "../login-page/login-page.component";
 import {RedirectNavigation} from "../redirect-navigation/redirect-navigation.component";
 import {Configurator} from "../configurator/configurator.component";
-import {Record} from "../record/record.component";
+import {RecordProduct} from "../record/record.component";
 import {List2} from "../list2/list2.component";
 import {ShopCategoriesDevObj} from "../shop-categories-dev-obj/shop-categories-dev-obj.component";
 import {ShopCategoriesObj} from "../shop-categories-obj/shop-categories-obj.component";
@@ -128,7 +128,7 @@ export class SectionObject {
       });
     } else if (this.pos == 3 && (this.objectID === 'ZAZNAM_PRODUKTU_NG2' || this.objectID === '6371')) {
       this.isComponentType = 2;
-      this.obj = Record;
+      this.obj = RecordProduct;
     } else if (this.pos == 3 && (this.objectID === 'KONFIGURATOR_NG2' || this.objectID === '6376')) {
       this.isComponentType = 2;
       this.obj = Configurator;

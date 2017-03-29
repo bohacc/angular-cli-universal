@@ -1,7 +1,7 @@
 import {Component, AfterViewInit, Inject} from '@angular/core';
 import {ActivatedRoute, Router, NavigationStart} from '@angular/router';
 
-let Constants = require('../../backend/constants');
+let Constants = require('../../../backend/constants');
 import { AppService } from '../../modules/app.service';
 import {ApiService} from "../../services/api.service";
 import {TranslateService} from "../../pipes/translate/translate.service";
