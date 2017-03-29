@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
@@ -7,8 +7,7 @@ import { RouterModule, PreloadAllModules } from '@angular/router';
 import { TransferHttpModule } from './transfer-http/transfer-http.module';
 
 import { MainComponent } from '../components/main/main.component';
-import { HomeViewComponent } from '../components/home/home.component';
-import {Home} from "../components/home_new/home.component";
+import {Home} from "../components/home/home.component";
 import {appRoutingProviders, routing} from "./app.routing";
 import {LostPassword} from "../components/lost-password/lost-password.component";
 import {ShippingAndDeliveryPopup} from "../components/shipping-and-delivery-popup/shipping-and-delivery-popup.component";
@@ -103,6 +102,9 @@ import {Test} from "../components/test/test.component";
 import {SlidesComponent} from "../components/slides/slides.component";
 import {Carousel} from "../components/carousel/carousel.component";
 import {RecordProduct} from "../components/record/record.component";
+import {ApiService} from "../services/api.service";
+import {TranslateService} from "../pipes/translate/translate.service";
+import {TRANSLATION_PROVIDERS} from "../pipes/translate/translation";
 
 @NgModule({
   declarations: [
@@ -225,7 +227,11 @@ import {RecordProduct} from "../components/record/record.component";
     })*/
   ],
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
+    ApiService,
+    TRANSLATION_PROVIDERS,
+    TranslateService,
+    { provide: LOCALE_ID, useValue: "cs-CZ" },
   ],
   exports: [
     MainComponent

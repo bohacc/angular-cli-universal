@@ -20,7 +20,12 @@ module.exports = {
     ],
     "modules": [
       "./node_modules"
-    ]
+    ],
+    "alias": {
+      "jqueryUI": "query-ui", //-1.12.0-rc.2
+      "jQuery": "jquery",
+      "jquery": "jquery",
+    }
   },
   "resolveLoader": {
     "modules": [
@@ -166,6 +171,13 @@ module.exports = {
     ]
   },
   "plugins": [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jquery: "jQuery",
+      jQuery: "jquery",
+      "windows.jQuery": "jquery",
+      'window.$': 'jquery',
+    }),
     new LoaderOptionsPlugin({
       "sourceMap": false,
       "options": {

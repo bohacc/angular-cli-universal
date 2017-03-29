@@ -1,7 +1,7 @@
 import { ModuleWithProviders } from '@angular/core';
 import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
 
-import { Home } from '../components/home_new/home.component';
+import { Home } from '../components/home/home.component';
 
 const appRoutes: Routes = [
   { path: '',

@@ -1,5 +1,5 @@
 <!--SIMPLE TYPE 1 -->
-<template [ngIf]="cat===0">
+<ng-template [ngIf]="cat===0">
   <div class="item" *ngFor="let item of defaultItems; let i = index">
     <div class="title">
       {{item.name}}
@@ -9,7 +9,7 @@
       </div>
     </div>
   </div>
-</template>
+</ng-template>
 
 <!-- CUSTOM TYPE 2-9 -->
 <list-filter-basic-custom-2 class="n-custom-filter" *ngIf="cat===2347" (onSelectItem)="onSelectItem($event)"></list-filter-basic-custom-2>
