@@ -98,7 +98,6 @@ import {PageHeader} from "../components/page-header/page-header.component";
 import {HtmlOutlet4} from "../components/html-outlet4/html-outlet4.component";
 import {ShopCategoriesAt} from "../components/shop-categories-at/shop-categories-at.component";
 import {LoginHeader} from "../components/login-header/login-header.component";
-import {Test} from "../components/test/test.component";
 import {SlidesComponent} from "../components/slides/slides.component";
 import {Carousel} from "../components/carousel/carousel.component";
 import {RecordProduct} from "../components/record/record.component";
@@ -120,7 +119,6 @@ import {TRANSLATION_PROVIDERS} from "../pipes/translate/translation";
     ShopCategories,
     ShopCategoriesAt,
     LoginHeader,
-    Test,
     SlidesComponent,
     Carousel,
     SlidesObj,
@@ -204,27 +202,45 @@ import {TRANSLATION_PROVIDERS} from "../pipes/translate/translation";
     ShippingAndDeliveryPopup,
     LostPassword
   ],
+  entryComponents: [
+    PageHeader,
+    SlidesObj,
+    Partners,
+    PageHeader,
+    LoginPage,
+    RedirectNavigation,
+    List,
+    List2,
+    Configurator,
+    RecordProduct,
+    ShopCategoriesObj,
+    ShopCategoriesObjAt,
+    ShopCategoriesDevObj,
+    ListObj,
+    List3Obj,
+    List4Obj,
+    SlidesComponent,
+    CartPage,
+    OrderStep1,
+    OrderStep2,
+    OrderStep3,
+    OrderStep4,
+    RegistrationSuccess,
+    RegistrationPage,
+    SearchResultList,
+    ProductsHomepage,
+    ListSimple,
+    PageHeaderAt,
+    LoginNewsletter,
+    List5Obj,
+    LostPassword
+  ],
   imports: [
     CommonModule,
     FormsModule,
     HttpModule,
     //TransferHttpModule,
     routing
-    /*RouterModule.forRoot([
-      {
-        path: '',
-        component: Home,
-        pathMatch: 'full'
-      },
-      {
-        path: 'lazy',
-        loadChildren: '../components/+lazy/lazy.module#LazyModule'
-      }
-    ], {
-      useHash: false,
-      preloadingStrategy: PreloadAllModules,
-      initialNavigation: 'enabled'
-    })*/
   ],
   providers: [
     appRoutingProviders,

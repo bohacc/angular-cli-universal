@@ -15,7 +15,7 @@ export class ApiService {
   }
 
   prepareOptions(opt: any) {
-    let options: any;
+    /*let options: any;
     if (!this.isBrowser) {
       let hostname = Zone.current.get('originUrl');
       if (!opt) {
@@ -27,8 +27,8 @@ export class ApiService {
       }
     } else {
       options = opt;
-    }
-    return options;
+    }*/
+    return opt;
   }
 
   get(url: string, options?: any) {

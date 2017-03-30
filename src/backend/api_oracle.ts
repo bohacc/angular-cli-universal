@@ -8,12 +8,10 @@ import { Connections } from './connections';
 export module Oracledb {
   export function select(sql, vals, req, connectData, obj) {
     return new Promise(function (resolve, reject) {
-      console.log('SELECT - FCE');
       //console.log(oracle);
       //console.log(Promise);
       oracle.fetchAsString = [ oracle.CLOB ];
       // connection instance to database from obj
-      console.log('SELECT - FCE 2');
       if (obj && obj.connection) {
         obj.connection.execute(
           sql,
@@ -63,7 +61,6 @@ export module Oracledb {
               reject(err.message);
               return;
             }
-            console.log('SELECT - CONNECTION');
             connection.execute(
               sql,
               vals,
@@ -72,7 +69,6 @@ export module Oracledb {
                 maxRows: 5000
               },
               function (err, result) {
-                console.log('SELECT - EXECUTE');
                 if (err) {
                   console.log(err);
                   connection.close(

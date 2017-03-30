@@ -128,7 +128,7 @@ export module Tools {
   }
 
   export function escapeRegExp (str) {
-    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+    return str ? String(str).replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1") : str;
   }
 
   export function getLangConfig (req: any) {

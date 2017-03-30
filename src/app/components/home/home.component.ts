@@ -59,6 +59,7 @@ export class Home implements AfterViewInit {
           });
       this.appService.setPath(code);
     });
+    this.appService.refreshWidth();
   }
 
   ngAfterViewInit() {

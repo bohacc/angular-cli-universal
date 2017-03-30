@@ -3107,7 +3107,8 @@ var Parser = function Parser(context, imports, fileInfo) {
                 ignored[fileInfo.filename] += preText.length;
             }
 
-            str = str.replace(/\r\n?/g, '\n');
+
+            str = String(str).replace(/\r\n?/g, '\n');
             // Remove potential UTF Byte Order Mark
             str = preText + str.replace(/^\uFEFF/, '') + modifyVars;
             imports.contents[fileInfo.filename] = str;
@@ -10002,13 +10003,13 @@ Promise.all = function (arr) {
 }
 
 Promise.reject = function (value) {
-  return new Promise(function (resolve, reject) { 
+  return new Promise(function (resolve, reject) {
     reject(value);
   });
 }
 
 Promise.race = function (values) {
-  return new Promise(function (resolve, reject) { 
+  return new Promise(function (resolve, reject) {
     values.forEach(function(value){
       Promise.resolve(value).then(resolve, reject);
     })

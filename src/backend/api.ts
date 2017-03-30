@@ -17,7 +17,6 @@ import {Translate} from "./translate";
 export function sessionidCookie (req, res, next) {
   let sql, vals = {};
   try {
-    console.log('SESSIONID COOKIE');
     if (!Tools.getSessionId(req)) {
       sql =
         'SELECT ' +
@@ -27,7 +26,6 @@ export function sessionidCookie (req, res, next) {
       //console.log(req);
       Oracledb.select(sql, vals, req, null, null).then(
         function (result) {
-          console.log('SESSIONID COOKIE 2');
           let data: any = Tools.getSingleResult(result);
           let sessionid = data.sessionid;
           Tools.createCookie(res, Constants.SESSIONID_CODE, sessionid);

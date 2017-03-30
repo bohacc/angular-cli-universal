@@ -24,7 +24,7 @@ export module Translate {
     let obj = this.getLanguageFile(req);
     let cond = Tools.escapeRegExp(str);
     let regex = new RegExp(cond, 'g');
-    return obj[str] !== undefined ? str.replace(regex, String((obj[str] || ''))) : str;
+    return String(str) && obj[str] !== undefined ? String(str).replace(regex, String((obj[str] || ''))) : str;
   }
 
   export function prepare (file, obj, req) {
@@ -34,7 +34,7 @@ export module Translate {
       if (obj[key] !== undefined) {
         cond = Tools.escapeRegExp('@@' + key + '@@');
         regex = new RegExp(cond, 'g');
-        str = str.replace(regex, String((obj[key] || '')));
+        str = String(str).replace(regex, String((obj[key] || '')));
       }
     }
     return str;

@@ -22,9 +22,8 @@ export class ShopCategories implements OnInit, SideMenu{
 
   ngOnInit() {
     let appService = AppService.getInstance();
-    let store = appService.getStore();
+    this.store = appService.getStore();
     this.field = this.typeShowing; //'showCatsMobile'
-    this.store = store;
   }
 
   // SIDE MENU

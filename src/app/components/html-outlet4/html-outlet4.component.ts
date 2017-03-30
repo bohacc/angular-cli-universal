@@ -14,7 +14,7 @@ declare var $: any;
 // Helper component to add dynamic components
 @Component({
   selector: 'dcl-wrapper-other',
-  template: `<div #target></div>`
+  template: `<ng-template #target></ng-template>`
 })
 export class HtmlOutlet4 {
   @ViewChild('target', {read: ViewContainerRef}) target;

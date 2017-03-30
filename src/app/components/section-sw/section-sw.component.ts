@@ -9,7 +9,7 @@ export class SectionSW {
   @Input('pos')
   pos: number;
   @Input('objects')
-  objects: Object;
+  objects: any;
 
   self = this; // copy of context
   html = '';

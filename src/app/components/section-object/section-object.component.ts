@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 
-import { Test } from '../test/test.component';
 import { PageHeader } from '../page-header/page-header.component';
 import { SlidesObj } from "../slides-obj/slides-obj.component";
 import {Partners} from "../partners/partners.component";
@@ -34,9 +33,9 @@ import {Tools} from "../../../backend/tools";
 
 @Component({
   selector: 'section-object',
-  template:
-    '<dcl-wrapper *ngIf="isComponentType==2" [type]="obj" [html]="html" [args]="args"></dcl-wrapper> ' +
-    '<dcl-wrapper-other *ngIf="isComponentType==1" [html]="html" [args]="args"></dcl-wrapper-other>'
+  template: '<ng-container *ngComponentOutlet="obj" content="args"></ng-container>'
+    /*'<dcl-wrapper *ngIf="isComponentType==2" [type]="obj" [html]="html" [args]="args"></dcl-wrapper> '*/
+    /*'<dcl-wrapper-other *ngIf="isComponentType==1" [html]="html" [args]="args"></dcl-wrapper-other>'*/
 })
 
 export class SectionObject {
@@ -51,7 +50,7 @@ export class SectionObject {
   @Input('meta') meta: any;
   html = '';
   self = this;
-  obj: any = Test;
+  obj: any;
   isComponentType: number = 0;
   appService: AppService;
 
