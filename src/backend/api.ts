@@ -32,8 +32,6 @@ export function sessionidCookie (req, res, next) {
           next();
         },
         function (result) {
-          console.log('SESSIONID COOKIE 3');
-          console.log(result);
           next();
         }
       );

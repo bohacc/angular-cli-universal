@@ -33,7 +33,14 @@ import {Tools} from "../../../backend/tools";
 
 @Component({
   selector: 'section-object',
-  template: '<ng-container *ngComponentOutlet="obj" content="args"></ng-container>'
+  template:
+    '<div *ngIf="isComponentType==2">' +
+    '  <ng-container *ngComponentOutlet="obj" content="args"></ng-container>' +
+    '</div>' +
+    '<div *ngIf="isComponentType==1">' +
+    '  <dynamic-html-outlet [html]="html"></dynamic-html-outlet>' +
+    '</div>'
+    /*'<dynamic-html-outlet *ngIf="isComponentType==1" [html]="html"></dynamic-html-outlet>'*/
     /*'<dcl-wrapper *ngIf="isComponentType==2" [type]="obj" [html]="html" [args]="args"></dcl-wrapper> '*/
     /*'<dcl-wrapper-other *ngIf="isComponentType==1" [html]="html" [args]="args"></dcl-wrapper-other>'*/
 })

@@ -104,6 +104,7 @@ import {RecordProduct} from "../components/record/record.component";
 import {ApiService} from "../services/api.service";
 import {TranslateService} from "../pipes/translate/translate.service";
 import {TRANSLATION_PROVIDERS} from "../pipes/translate/translation";
+import {HtmlOutlet} from "../components/html-outlet/html-outlet.component";
 
 @NgModule({
   declarations: [
@@ -113,6 +114,7 @@ import {TRANSLATION_PROVIDERS} from "../pipes/translate/translation";
     SectionSW,
     MyFilterArray,
     SectionObject,
+    HtmlOutlet,
     HtmlOutlet3,
     HtmlOutlet4,
     PageHeader,
