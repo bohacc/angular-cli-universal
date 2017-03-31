@@ -105,6 +105,7 @@ import {ApiService} from "../services/api.service";
 import {TranslateService} from "../pipes/translate/translate.service";
 import {TRANSLATION_PROVIDERS} from "../pipes/translate/translation";
 import {HtmlOutlet} from "../components/html-outlet/html-outlet.component";
+import {Cmp} from "../components/cmp/cmp.component";
 
 @NgModule({
   declarations: [
@@ -202,7 +203,8 @@ import {HtmlOutlet} from "../components/html-outlet/html-outlet.component";
     PageHeaderAt,
     List5Obj,
     ShippingAndDeliveryPopup,
-    LostPassword
+    LostPassword,
+    Cmp
   ],
   entryComponents: [
     PageHeader,
@@ -235,7 +237,8 @@ import {HtmlOutlet} from "../components/html-outlet/html-outlet.component";
     PageHeaderAt,
     LoginNewsletter,
     List5Obj,
-    LostPassword
+    LostPassword,
+    Cmp
   ],
   imports: [
     CommonModule,

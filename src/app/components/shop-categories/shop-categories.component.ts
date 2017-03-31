@@ -37,7 +37,8 @@ export class ShopCategories implements OnInit, SideMenu{
   }
 
   menuIsShow(item: string) {
-    return this.menuShows.indexOf(item) > -1;
+    //return this.menuShows.indexOf(item) > -1;
+    return
   }
 
   menuShowItemsMobile(item: string) {

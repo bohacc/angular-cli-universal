@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 //import {UniversalModule, isBrowser} from 'angular2-universal';
 import { routing, appRoutingProviders } from '../../modules/app.routing';
 import {AppService} from "../../modules/app.service";
+import {AppModule} from "../../modules/app.module";
+import {BrowserModule} from "@angular/platform-browser";
 let Constants = require('../../../backend/constants');
 
 declare var $: any;
@@ -35,10 +37,10 @@ export class HtmlOutlet4 {
   }
 
   updateComponent() {
-    if(!this.isViewInitialized) {
+    if (!this.isViewInitialized) {
       return;
     }
-    if(this.cmpRef) {
+    if (this.cmpRef) {
       this.cmpRef.destroy();
     }
     if (!this.html) {
@@ -72,8 +74,6 @@ export class HtmlOutlet4 {
       init() {
         this.setLanguageCode();
         if (this.isBrowser && html.indexOf('slides') > -1) {
-          //$(this._elRef.nativeElement).find('.js-hide').removeClass('hide');
-          //$(this._elRef.nativeElement).find('.js-default').addClass('hide');
           this.isLoaded = true;
 
           $(require('../../../../tools/js/jquery/slideshow/jquery.slides.js'));
@@ -97,7 +97,7 @@ export class HtmlOutlet4 {
           });
         } else {
           if (html.indexOf('slides') > -1) {
-            //this._elRef.nativeElement.classList.remove("hide");
+
           }
         }
       }
@@ -107,9 +107,10 @@ export class HtmlOutlet4 {
         TemplateComponent
       ],
       imports: [
-        //UniversalModule,
+        BrowserModule,
         FormsModule,
-        routing
+        routing,
+        AppModule
       ],
       providers: [
         appRoutingProviders,
@@ -128,16 +129,16 @@ export class HtmlOutlet4 {
   }
 
   ngOnChanges() {
-    this.updateComponent();
+    //this.updateComponent();
   }
 
-  ngAfterViewInit() {
+  ngAfterViewChecked() {
     this.isViewInitialized = true;
     this.updateComponent();
   }
 
   ngOnDestroy() {
-    if(this.cmpRef) {
+    if (this.cmpRef) {
       this.cmpRef.destroy();
     }
   }

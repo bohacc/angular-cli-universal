@@ -29,7 +29,6 @@ export class SelectBox implements OnInit {
 
   ngOnInit() {
     this.setDefault();
-    // TODO: selectedItem = items[i].selected
   }
 
   ngOnChanges(changes) {
@@ -45,17 +44,15 @@ export class SelectBox implements OnInit {
     this.showItems = !this.showItems;
   }
 
-  onSelect(item: ISelectBox) {
-    this.onSelectItem.emit(item);
+  onSelect(item: ISelectBox, init: Boolean) {
+    if (!init) {
+      this.onSelectItem.emit(item);
+    }
     this.selectedItem = item;
     this.showItems = false;
   }
 
   setDefault() {
-    this.onSelect(this.defaultItem);
-    /*this.showItems = false;
-    if (this.defaultItem.id) {
-      this.selectedItem = this.defaultItem;
-    }*/
+    this.onSelect(this.defaultItem, true);
   }
 }

@@ -30,16 +30,17 @@ import {LoginNewsletter} from "../login-newsletter/login-newsletter.component";
 import {List5Obj} from "../list5-obj/list5-obj.component";
 import {LostPassword} from "../lost-password/lost-password.component";
 import {Tools} from "../../../backend/tools";
+import {Cmp} from "../cmp/cmp.component";
 
 @Component({
   selector: 'section-object',
   template:
     '<div *ngIf="isComponentType==2">' +
     '  <ng-container *ngComponentOutlet="obj" content="args"></ng-container>' +
-    '</div>' +
-    '<div *ngIf="isComponentType==1">' +
-    '  <dynamic-html-outlet [html]="html"></dynamic-html-outlet>' +
     '</div>'
+    /*'<div *ngIf="isComponentType==1">' +
+    '  <dcl-wrapper-other [type]="obj" [html]="html" [args]="args"></dcl-wrapper-other>' +
+    '</div>'*/
     /*'<dynamic-html-outlet *ngIf="isComponentType==1" [html]="html"></dynamic-html-outlet>'*/
     /*'<dcl-wrapper *ngIf="isComponentType==2" [type]="obj" [html]="html" [args]="args"></dcl-wrapper> '*/
     /*'<dcl-wrapper-other *ngIf="isComponentType==1" [html]="html" [args]="args"></dcl-wrapper-other>'*/
@@ -131,6 +132,7 @@ export class SectionObject {
       this.http.get(this.appService.getRootPath() + '/templates/' + this.src + '?' + Math.random()).subscribe((res) => {
         this.html = res.text();
         this.isComponentType = 1;
+        this.obj = Cmp;
       });
     } else if (this.pos == 3 && (this.objectID === 'ZAZNAM_PRODUKTU_NG2' || this.objectID === '6371')) {
       this.isComponentType = 2;

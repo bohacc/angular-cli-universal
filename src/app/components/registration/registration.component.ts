@@ -92,7 +92,7 @@ export class Registration {
         let data: any = res.json();
         this.user = data;
         this.setDefault();
-      })
+      });
   }
 
   save() {
@@ -359,6 +359,7 @@ export class Registration {
   }
 
   onSelectSex(item: any, model: string) {
+    console.log('onSelectSex');
     this.user[model] = item.sex;
     this.user.sexNamePrefix = this.translate.instant(item.val);
   }
@@ -366,7 +367,7 @@ export class Registration {
   getCountries() {
     this.api.get('/user/countries')
       .subscribe(res => {
-        var data: any = res.json();
+        let data: any = res.json();
         this.countries = data.countries;
         this.countriesDelivery = data.countriesDelivery;
       });
@@ -403,7 +404,9 @@ export class Registration {
     let _this = this;
     this.defaultSex = this.sex.filter(function(el) {
       return _this.user.sex === el.sex;
-    })[0];
+    })[0] || this.sex[0];
+    this.user.sex = this.defaultSex.sex;
+    this.user.sexNamePrefix = this.translate.instant(this.defaultSex.val);
   }
 
   onLoginChange() {

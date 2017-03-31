@@ -22,13 +22,12 @@ export class MenuSetActive implements AfterViewInit {
   }
 
   ngOnInit() {
-    this.router.events.subscribe(path => {
+    /*this.router.events.subscribe(path => {
       if (this.isOn) {
         this.setActive();
         this.onCollapseAll.emit(null);
       }
-    });
-
+    });*/
   }
 
   ngAfterViewInit() {
