@@ -110,11 +110,10 @@
     "branchPrefix": "dep-update-",
     "label": "dep-update"
   },
-  /*"lint-staged": {
+  "lint-staged": {
     "*.ts": "tslint",
     "*.css": "stylelint"
-  },*/
-  /*"pre-commit": "lint-staged",*/
+  },
   "stylelint": {
     "extends": "stylelint-config-standard"
   },
