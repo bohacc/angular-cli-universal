@@ -12,12 +12,10 @@ import {TranslateService} from "../../pipes/translate/translate.service";
 })
 
 export class OrderSummary {
-  appService: AppService;
   inProcess: Boolean = false;
   user: any;
 
-  constructor (private router: Router, private api: ApiService, private translate: TranslateService) {
-    this.appService = AppService.getInstance();
+  constructor (private router: Router, private api: ApiService, private translate: TranslateService, private appService: AppService) {
     this.user = {
       login: '',
       password: '',

@@ -11,7 +11,6 @@ import {ApiService} from "../../services/api.service";
 export class Payment {
   @Output() onSelect = new EventEmitter<{item: any, callback: Function}>();
   @Input() defaultPayment: string;
-  appService: AppService;
   paymentObj: any = {records: []};
   selectedPayment: any;
   isProcess: Boolean = false;
@@ -19,8 +18,7 @@ export class Payment {
   store: any;
   formatNumber1: string;
 
-  constructor (private api: ApiService) {
-    this.appService = AppService.getInstance();
+  constructor (private api: ApiService, private appService: AppService) {
     this.store = this.appService.getStore();
     this.formatNumber1 = Constants.FORMAT_NUMBER_1;
   }

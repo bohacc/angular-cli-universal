@@ -106,6 +106,8 @@ import {TranslateService} from "../pipes/translate/translate.service";
 import {TRANSLATION_PROVIDERS} from "../pipes/translate/translation";
 import {HtmlOutlet} from "../components/html-outlet/html-outlet.component";
 import {Cmp} from "../components/cmp/cmp.component";
+import {ToolsService} from "../services/tools.service";
+import {AppService} from "./app.service";
 
 @NgModule({
   declarations: [
@@ -244,12 +246,13 @@ import {Cmp} from "../components/cmp/cmp.component";
     CommonModule,
     FormsModule,
     HttpModule,
-    //TransferHttpModule,
     routing
   ],
   providers: [
     appRoutingProviders,
     ApiService,
+    ToolsService,
+    AppService,
     TRANSLATION_PROVIDERS,
     TranslateService,
     { provide: LOCALE_ID, useValue: "cs-CZ" },

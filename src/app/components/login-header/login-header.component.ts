@@ -11,12 +11,10 @@ import {TranslateService} from "../../pipes/translate/translate.service";
   templateUrl: 'login-header.template.html',
 })
 export class LoginHeader {
-  appService: AppService;
   loginName: string;
   isLogged: Boolean;
 
-  constructor(private router: Router, private api: ApiService, private translate: TranslateService) {
-    this.appService = AppService.getInstance();
+  constructor(private router: Router, private api: ApiService, private translate: TranslateService, private appService: AppService) {
   }
 
   ngOnInit() {

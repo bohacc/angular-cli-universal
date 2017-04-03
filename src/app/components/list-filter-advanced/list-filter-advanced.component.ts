@@ -17,15 +17,13 @@ export class ListFilterAdvanced {
   items: Array<ISelectBox> = [];
   defaultItems: Array<ISelectBox> = [];
   loading: Boolean;
-  appService: AppService;
   httpTimeout: any;
   httpSubscription: any;
   defaultItem: ISelectBox = {id: '', name: '', val: ''};
   selectedItems: Array<ISelectBox> = [];
   isLoadDefault: Boolean;
 
-  constructor(private api: ApiService, private translate: TranslateService) {
-    this.appService = AppService.getInstance();
+  constructor(private api: ApiService, private translate: TranslateService, private appService: AppService) {
   }
 
   ngOnInit() {

@@ -12,12 +12,10 @@ export class ShippingAndPayment {
   defaultShipping: string = '';
   defaultPayment: string = '';
   isInit: Boolean = false;
-  appService: AppService;
   selectedShipping: string;
   selectedPayment: string;
 
-  constructor(private api: ApiService) {
-    this.appService = AppService.getInstance();
+  constructor(private api: ApiService, private appService: AppService) {
   }
 
   ngOnInit() {

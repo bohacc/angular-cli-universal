@@ -13,7 +13,6 @@ import {ShippingAndDeliveryPopup} from "../shipping-and-delivery-popup/shipping-
 
 export class Cart {
   @ViewChild('sdp') ShippingAndDeliveryPopupCmp: ShippingAndDeliveryPopup;
-  appService: AppService;
   cartObj: any = {};
   amount: number = 1;
   otherProduct: any = {code: null, amount: 1};
@@ -33,8 +32,7 @@ export class Cart {
   isChange: Boolean = false;
   isAustria: Boolean = false;
 
-  constructor (private router: Router, private api: ApiService, private translate: TranslateService) {
-    this.appService = AppService.getInstance();
+  constructor (private router: Router, private api: ApiService, private translate: TranslateService, private appService: AppService) {
     this.store = this.appService.getStore();
     this.formatNumber1 = Constants.FORMAT_NUMBER_1;
     this.formatNumber2 = Constants.FORMAT_NUMBER_2;

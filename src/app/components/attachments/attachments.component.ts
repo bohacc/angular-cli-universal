@@ -13,10 +13,8 @@ export class Attachments {
   @Input('tableName') tableName: string;
   items: Array<{id: number, name: string, ext: string, fileName: string, size: number}>;
   loading: Boolean;
-  appService: AppService;
 
-  constructor(private api: ApiService) {
-    this.appService = AppService.getInstance();
+  constructor(private api: ApiService, private appService: AppService) {
   }
 
   ngOnInit() {

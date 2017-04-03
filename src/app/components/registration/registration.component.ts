@@ -17,7 +17,6 @@ let Constants = require('../../../backend/constants');
 export class Registration {
   @Input() type: number;
   @Input() userCache: any;
-  appService: AppService;
   user: any;
   httpSubscription: any;
   inProcess: Boolean = false;
@@ -30,8 +29,7 @@ export class Registration {
   placeholderVatId: string;
   store: any = {user: {b2b: null}};
 
-  constructor (private api: ApiService, private router: Router, private translate: TranslateService) {
-    this.appService = AppService.getInstance();
+  constructor (private api: ApiService, private router: Router, private translate: TranslateService, private appService: AppService) {
     this.user = {
       login: '',
       password: '',

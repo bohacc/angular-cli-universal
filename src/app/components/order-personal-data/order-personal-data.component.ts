@@ -13,12 +13,10 @@ import {ApiService} from "../../services/api.service";
 
 export class OrderPersonalData {
   @ViewChild('registration') registrationCmp: Registration;
-  appService: AppService;
   user: any;
   pathAfterLogin: string;
 
-  constructor (private router: Router, private api: ApiService) {
-    this.appService = AppService.getInstance();
+  constructor (private router: Router, private api: ApiService, private appService: AppService) {
     this.pathAfterLogin = Constants.PATHS.ORDER_PERSONAL_DATA;
     this.user = {isLogged: false};
   }

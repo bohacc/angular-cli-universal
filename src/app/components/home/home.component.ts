@@ -21,7 +21,6 @@ declare var $: any;
 
 export class Home implements AfterViewInit {
   objects: any;
-  appService: AppService;
   bodyClass: Boolean = false;
 
   constructor(
@@ -30,9 +29,10 @@ export class Home implements AfterViewInit {
     private translate: TranslateService,
     private metaService: MetaService,
     private router: Router,
+    private appService: AppService,
     @Inject('isBrowser') private isBrowser: Boolean
   ){
-    this.appService = AppService.getInstance();
+
   }
 
   ngOnInit() {

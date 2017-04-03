@@ -11,13 +11,13 @@ declare var $: any;
 })
 
 export class ScrollBarWidth implements OnInit {
-  constructor(private _elRef: ElementRef, @Inject('isBrowser') private isBrowser: Boolean) {}
+  constructor(private _elRef: ElementRef, @Inject('isBrowser') private isBrowser: Boolean, private appService: AppService) {}
 
   ngOnInit() {
     if (this.isBrowser) {
       // JQUERY ACTUAL VIEWPORT
       let widthWithScroll = $(this._elRef.nativeElement).outerWidth();
-      AppService.getInstance().setScrollBarWidth(100 - widthWithScroll);
+      this.appService.setScrollBarWidth(100 - widthWithScroll);
     }
   }
 }

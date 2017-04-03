@@ -14,10 +14,8 @@ export class ListItem {
   formatNumber1: string;
   formatNumber2: string;
   store: any = {user: {}};
-  appService: AppService;
 
-  constructor(private router: Router, private api: ApiService) {
-    this.appService = AppService.getInstance();
+  constructor(private router: Router, private api: ApiService, private appService: AppService) {
     this.formatNumber1 = Constants.FORMAT_NUMBER_1;
     this.formatNumber2 = Constants.FORMAT_NUMBER_2;
   }

@@ -8,15 +8,9 @@ import { IListFilter } from '../components/list-filter/list-filter.interface';
 
 @Injectable()
 export class AppService {
-  static instance: AppService;
-  static isCreating: boolean = false;
   store: any;
-  @Inject('isBrowser') private isBrowser: Boolean;
 
-  constructor() {
-    if (!AppService.isCreating) {
-      throw new Error("You can't call new in Singleton instances! Call SingletonService.getInstance() instead.");
-    }
+  constructor(@Inject('isBrowser') private isBrowser: Boolean) {
     this.store = {
       appWidth: 0,
       scrollBarWidth: 0,
@@ -33,16 +27,6 @@ export class AppService {
       isAustria: false,
       passwordPattern: null
     };
-  }
-
-  static getInstance() {
-    if (AppService.instance == null) {
-      AppService.isCreating = true;
-      AppService.instance = new AppService();
-      AppService.isCreating = false;
-    }
-
-    return AppService.instance;
   }
 
   getScrollBarWidth() {

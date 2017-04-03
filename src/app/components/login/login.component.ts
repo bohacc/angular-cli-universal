@@ -17,10 +17,8 @@ export class Login {
   password: string;
   isError: Boolean;
   isFilled: Boolean = true;
-  appService: AppService;
 
-  constructor(private router: Router, private api: ApiService, private translate: TranslateService) {
-    this.appService = AppService.getInstance();
+  constructor(private router: Router, private api: ApiService, private translate: TranslateService, private appService: AppService) {
   }
 
   ngOnInit() {

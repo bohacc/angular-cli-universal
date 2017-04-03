@@ -10,12 +10,10 @@ import {AppService} from "../../modules/app.service";
 
 export class List5Obj {
   meta: any = {category: {id: null}};
-  appService: AppService;
   @Input() args: any;
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService, private appService: AppService) {
     this.meta.showDownload = true;
-    this.appService = AppService.getInstance();
   }
 
   ngOnInit() {

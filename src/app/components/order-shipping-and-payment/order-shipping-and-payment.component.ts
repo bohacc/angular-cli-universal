@@ -10,11 +10,10 @@ import {AppService} from "../../modules/app.service";
 })
 
 export class OrderShippingAndPayment {
-  appService: AppService;
   filled: Boolean = false;
 
-  constructor (private router: Router) {
-    this.appService = AppService.getInstance();
+  constructor (private router: Router, private appService: AppService) {
+
   }
 
   onSubmit() {

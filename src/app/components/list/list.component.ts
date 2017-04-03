@@ -18,7 +18,6 @@ export class List {
   @Input() meta: any = {};
   @Input() args: any = {};
   @ViewChild(Pagination) pagination:Pagination;
-  appService: AppService;
   products: Array<Object>;
   defaultItem: ISelectBox;
   itemsOnPage: Array<ISelectBox>;
@@ -41,8 +40,7 @@ export class List {
   isLoaded: Boolean = false;
   loading: Boolean = false;
 
-  constructor(private api: ApiService, private translate: TranslateService) {
-    this.appService = AppService.getInstance();
+  constructor(private api: ApiService, private translate: TranslateService, private appService: AppService) {
     this.page = 1;
     this.products = [];
     this.itemsOnPage = [

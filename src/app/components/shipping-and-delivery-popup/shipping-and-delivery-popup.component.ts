@@ -10,10 +10,8 @@ export class ShippingAndDeliveryPopup {
   @Input() cartObj: any;
   isOpen: Boolean = false;
   store: any = {user: {b2b: false}};
-  appService: AppService;
 
-  constructor() {
-    this.appService = AppService.getInstance();
+  constructor(private appService: AppService) {
   }
 
   ngOnInit() {

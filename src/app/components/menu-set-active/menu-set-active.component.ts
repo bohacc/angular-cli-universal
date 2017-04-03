@@ -14,11 +14,9 @@ declare var $: any;
 export class MenuSetActive implements AfterViewInit {
   @Output('onCollapseAll') onCollapseAll = new EventEmitter();
   @Output('onDefaultAction') onDefaultAction = new EventEmitter();
-  appService: AppService;
   isOn: Boolean = false;
 
-  constructor(private _elRef: ElementRef, private router: Router, @Inject('isBrowser') private isBrowser: Boolean) {
-    this.appService = AppService.getInstance();
+  constructor(private _elRef: ElementRef, private router: Router, @Inject('isBrowser') private isBrowser: Boolean, private appService: AppService) {
   }
 
   ngOnInit() {

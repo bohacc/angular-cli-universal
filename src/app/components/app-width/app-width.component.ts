@@ -11,12 +11,12 @@ declare var $: any;
 })
 
 export class AppWidth implements OnInit {
-  constructor(private _elRef: ElementRef, @Inject('isBrowser') private isBrowser: Boolean) {}
+  constructor(private _elRef: ElementRef, @Inject('isBrowser') private isBrowser: Boolean, private appService: AppService) {}
 
   ngOnInit() {
     if (this.isBrowser) {
       let appWidth = $(this._elRef.nativeElement).outerWidth();
-      AppService.getInstance().setAppWidth(appWidth);
+      this.appService.setAppWidth(appWidth);
     }
   }
 }

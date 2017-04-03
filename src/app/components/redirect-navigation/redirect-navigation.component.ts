@@ -12,10 +12,8 @@ declare var $: any;
 
 export class RedirectNavigation implements AfterViewInit {
   redirects: Array<Object>;
-  appService: AppService;
 
-  constructor(private api: ApiService) {
-    this.appService = AppService.getInstance();
+  constructor(private api: ApiService, private appService: AppService) {
   }
 
   ngAfterViewInit() {

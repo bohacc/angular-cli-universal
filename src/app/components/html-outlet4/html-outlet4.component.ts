@@ -24,15 +24,14 @@ export class HtmlOutlet4 {
   @Input() args;
   cmpRef: ComponentRef<any>;
   private isViewInitialized:boolean = false;
-  appService: AppService;
   store: any;
 
   constructor(
     private componentFactoryResolver: ComponentFactoryResolver,
     private compiler: Compiler,
+    private appService: AppService,
     @Inject('isBrowser') private isBrowser: Boolean)
   {
-    this.appService = AppService.getInstance();
     this.store = this.appService.getStore();
   }
 

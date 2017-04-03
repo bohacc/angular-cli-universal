@@ -10,10 +10,8 @@ export class SimilarProducts {
   @Input('id') id: number;
   @Input('count') count: number;
   products: Array<Object> = [];
-  appService: AppService;
 
-  constructor(private api: ApiService) {
-    this.appService = AppService.getInstance();
+  constructor(private api: ApiService, private appService: AppService) {
   }
 
   ngOnInit() {

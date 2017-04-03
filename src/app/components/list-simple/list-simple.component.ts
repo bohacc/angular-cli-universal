@@ -10,12 +10,10 @@ let Constants = require('../../../backend/constants');
 
 export class ListSimple {
   @Input() rowsonpage: number;
-  appService: AppService;
   products: Array<Object> = [];
   notFoundText: string = Constants.NOT_FOUND_TEXT;
 
-  constructor(private api: ApiService) {
-    this.appService = AppService.getInstance();
+  constructor(private api: ApiService, private appService: AppService) {
   }
 
   ngOnInit() {

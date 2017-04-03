@@ -8,31 +8,12 @@ declare var $: any;
 
 @Injectable()
 export class ToolsService {
-  static instance: ToolsService;
-  static isCreating: boolean = false;
   store: any;
-  appService: AppService;
-  @Inject('isBrowser') private isBrowser: Boolean;
 
-  constructor() {
-    this.appService = AppService.getInstance();
-    if (!ToolsService.isCreating) {
-      throw new Error("You can't call new in Singleton instances! Call SingletonService.getInstance() instead.");
-    }
-  }
-
-  static getInstance() {
-    if (ToolsService.instance == null) {
-      ToolsService.isCreating = true;
-      ToolsService.instance = new ToolsService();
-      ToolsService.isCreating = false;
-    }
-
-    return ToolsService.instance;
+  constructor(@Inject('isBrowser') private isBrowser: Boolean, private appService: AppService) {
   }
 
   zoomImage(el) {
-    //let obj = $(el).find(".product_detail .product_image_main a");
     let obj = $(el).find(".product_image_main a");
     obj.mouseover(function() {
       var container = obj;
@@ -64,7 +45,6 @@ export class ToolsService {
 
       let width = this.appService.getAppWidth() + this.appService.getScrollBarWidth();
       if (width >= 992) {
-        //$(el).find(".product_detail .product_image_main a").mouseover(()=> {
         $(el).find(".product_image_main a").mouseover(()=> {
           this.zoomImage(el);
         });
@@ -72,7 +52,6 @@ export class ToolsService {
       $(window).resize(()=> {
         var width = this.appService.getAppWidth() + this.appService.getScrollBarWidth();
         if (width >= 992) {
-          //$(el).find(".product_detail .product_image_main a").mouseover(()=> {
           $(el).find(".product_image_main a").mouseover(()=> {
             this.zoomImage(el);
           });
@@ -90,17 +69,12 @@ export class ToolsService {
 
           // SOURCE
           var image = $(this).find("img");
-          //var image_nth = $(this).attr("data-nth-child");
-          //var image_main = image.attr("data-main-src");
           var image_full = image.attr("data-full-src");
 
           // TARGET
-          //var image_main_a = $(".vertical_gallery_preview div");
           var image_main_src = $(el).find(".vertical_gallery_preview div img");
 
           // SET ATTRIBUTES
-          //image_main_a.attr("href",image_full);
-          //image_main_a.attr("data-image-nth",image_nth);
           image_main_src.attr("src", image_full);
 
           // MAKE CURRENT ITEM IN CAROUSEL ACTIVE
@@ -112,7 +86,6 @@ export class ToolsService {
 
   initProductPreview(el) {
     if (this.isBrowser) {
-      //$(el).find(".product_detail .product_image_list .content div").each(function () {
       $(el).find(".product_image_list .content div").each(function () {
         $(this).click(function (e) {
           // RESET ACTIVE STATE FOR OTHER ITEMS
@@ -121,26 +94,15 @@ export class ToolsService {
           // SOURCE
           var image = $(this).find("img");
           var image_nth = $(this).attr("data-nth-child");
-          //console.log("nth-child: " + image_nth);
           var image_main = image.attr("data-main-src");
-          //console.log('image_main: ' + image_main);
           var image_full = image.attr("data-full-src");
-          //console.log('image_full: ' + image_full);
 
           // TARGET
-          //var image_main_a = $(el).find(".product_detail .product_image_main a");
           var image_main_a = $(el).find(".product_image_main a");
-          //var image_main_src = $(el).find(".product_detail .product_image_main a img.main_image");
           var image_main_src = $(el).find(".product_image_main a img.main_image");
-          //console.log('image_main_src');
-          //console.log(image_main_src);
-          //var image_zoom_src = $(el).find(".product_detail .product_image_main a img.zoom_image");
           var image_zoom_src = $(el).find(".product_image_main a img.zoom_image");
-          //console.log('image_zoom_src');
-          //console.log(image_zoom_src);
 
           // SET ATTRIBUTES
-          //image_main_a.attr("href",image_full);
           image_main_a.attr("data-image-nth", image_nth);
           image_main_src.attr("src", image_main);
           image_zoom_src.attr("src", image_full);

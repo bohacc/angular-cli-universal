@@ -13,10 +13,9 @@ export class ListFilterBasicCustom1 {
   defaultItem: ISelectBox = {id: '', name: '', val: ''};
   items: Array<ISelectBox> = [];
   selectedItems: Array<ISelectBox> = [];
-  appService: AppService;
 
-  constructor() {
-    this.appService = AppService.getInstance();
+  constructor(private appService: AppService) {
+
   }
 
   onSelectItem(item: ISelectBox) {

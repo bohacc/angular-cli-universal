@@ -11,7 +11,6 @@ import {ApiService} from "../../services/api.service";
 export class Shipping {
   @Output() onSelect = new EventEmitter<{item: any, callback: Function}>();
   @Input() defaultShipping: string;
-  appService: AppService;
   shippingObj: any = {records: []};
   selectedShipping: any;
   isProcess: Boolean = false;
@@ -19,8 +18,7 @@ export class Shipping {
   store: any;
   formatNumber1: string;
 
-  constructor (private api: ApiService) {
-    this.appService = AppService.getInstance();
+  constructor (private api: ApiService, private appService: AppService) {
     this.store = this.appService.getStore();
     this.formatNumber1 = Constants.FORMAT_NUMBER_1;
   }

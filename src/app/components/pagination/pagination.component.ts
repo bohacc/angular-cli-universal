@@ -16,7 +16,6 @@ export class Pagination implements OnInit {
   @Output('onPage') onPage = new EventEmitter<number>();
   @Output('onCount') onCount = new EventEmitter<number>();
   @Output('onLoadNextItems') onLoadNextItems = new EventEmitter<Boolean>();
-  appService: AppService;
   itemsCount: number;
   showPrior: Boolean;
   showNext: Boolean;
@@ -44,8 +43,7 @@ export class Pagination implements OnInit {
   httpTimeout: any;
   httpSubscription: any;
 
-  constructor(private api: ApiService, @Inject('isBrowser') private isBrowser: Boolean) {
-    this.appService = AppService.getInstance();
+  constructor(private api: ApiService, @Inject('isBrowser') private isBrowser: Boolean, private appService: AppService) {
   }
 
   ngOnInit() {

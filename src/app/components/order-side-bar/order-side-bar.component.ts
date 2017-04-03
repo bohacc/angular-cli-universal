@@ -9,13 +9,11 @@ import {ApiService} from "../../services/api.service";
 })
 
 export class OrderSideBar {
-  appService: AppService;
   cartObj: any = {records: []};
   formatNumber1: string;
   store: any = {user: {}};
 
-  constructor (private api: ApiService) {
-    this.appService = AppService.getInstance();
+  constructor (private api: ApiService, private appService: AppService) {
     this.formatNumber1 = Constants.FORMAT_NUMBER_1;
   }
 

@@ -10,11 +10,7 @@ let Constants = require('../../../backend/constants');
   templateUrl: 'home-static.template.html',
 })
 export class HomeStatic {
-  appService: AppService;
-
-  constructor(private api: ApiService, private translate: TranslateService) {
-    this.appService = AppService.getInstance();
-    //this.translate.use(Constants.CZECH_COUNTRY_CODE);
+  constructor(private api: ApiService, private translate: TranslateService, private appService: AppService) {
     this.api.get('/language')
       .subscribe(res => {
         let data: any = res.json();

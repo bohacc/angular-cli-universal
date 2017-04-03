@@ -16,10 +16,9 @@ export class OrderHeader {
     Constants.PATHS.ORDER_SHIPPING_AND_PAYMENT,
     Constants.PATHS.ORDER_SUMMARY
   ];
-  appService: AppService;
 
-  constructor () {
-    this.appService = AppService.getInstance();
+  constructor (private appService: AppService) {
+
   }
 
   ngOnInit() {

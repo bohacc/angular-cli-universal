@@ -11,14 +11,12 @@ import {TranslateService} from "../../pipes/translate/translate.service";
 })
 
 export class PageHeaderAt implements OnInit {
-  appService: AppService;
   store: any;
   priceVatAmount: string;
   amount: string;
   searchStr: string;
 
-  constructor(private api: ApiService, private router: Router, private translate: TranslateService) {
-    this.appService = AppService.getInstance();
+  constructor(private api: ApiService, private router: Router, private translate: TranslateService, private appService: AppService) {
     this.store = this.appService.getStore();
   }
 

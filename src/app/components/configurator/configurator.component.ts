@@ -24,8 +24,6 @@ export class Configurator {
   tabsStateHover: number;
   amount: string;
   redirect: string;
-  toolsService: ToolsService;
-  appService: AppService;
   inConfiguration: Boolean = true;
   configuration: any = {};
   popupShow: Boolean = false;
@@ -39,12 +37,12 @@ export class Configurator {
     private route: ActivatedRoute,
     private api: ApiService,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private toolsService: ToolsService,
+    private appService: AppService
   ) {
     this.formatNumber1 = Constants.FORMAT_NUMBER_1;
     this.formatNumber2 = Constants.FORMAT_NUMBER_2;
-    this.toolsService = ToolsService.getInstance();
-    this.appService = AppService.getInstance();
     this.initConfiguration();
   }
 

@@ -8,10 +8,8 @@ declare var Zone: any;
 
 @Injectable()
 export class ApiService {
-  appService: AppService;
 
-  constructor(public http: Http, @Inject('isBrowser') private isBrowser: Boolean) {
-    this.appService = AppService.getInstance();
+  constructor(public http: Http, @Inject('isBrowser') private isBrowser: Boolean, private appService: AppService) {
   }
 
   prepareOptions(opt: any) {

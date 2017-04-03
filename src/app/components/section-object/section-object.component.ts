@@ -60,10 +60,9 @@ export class SectionObject {
   self = this;
   obj: any;
   isComponentType: number = 0;
-  appService: AppService;
 
-  constructor(private http: Http) {
-    this.appService = AppService.getInstance();
+  constructor(private http: Http, private appService: AppService) {
+
   }
 
   ngOnChanges() {

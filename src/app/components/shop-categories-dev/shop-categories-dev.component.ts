@@ -16,11 +16,10 @@ export class ShopCategoriesDev implements OnInit, SideMenu{
   menuShows: Array<string> = [];
   menuShowsMobile: Array<string> = [];
 
-  constructor() {}
+  constructor(private appService: AppService) {}
 
   ngOnInit() {
-    let appService = AppService.getInstance();
-    let store = appService.getStore();
+    let store = this.appService.getStore();
     this.field = this.typeShowing; //'showCatsMobile'
     this.store = store;
   }

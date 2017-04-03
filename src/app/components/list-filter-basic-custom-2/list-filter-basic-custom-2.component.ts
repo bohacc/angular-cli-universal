@@ -13,10 +13,8 @@ export class ListFilterBasicCustom2 {
   defaultItem: ISelectBox = {id: '', name: '', val: ''};
   itemsComboBox: Array<ISelectBox>;
   selectedItems: Array<ISelectBox> = [];
-  appService: AppService;
 
-  constructor() {
-    this.appService = AppService.getInstance();
+  constructor(private appService: AppService) {
     this.itemsComboBox = [
       {id: 'MC000002:75 W', name: '75 W', val: 'MC000002:75 W'}
     ];

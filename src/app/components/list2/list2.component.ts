@@ -17,11 +17,9 @@ export class List2 {
   @Input() args: any;
   tabsState: number = 1;
   tabsStateHover: number;
-  appService: AppService;
   category: any = {id: null};
 
-  constructor(private api: ApiService, @Inject('isBrowser') private isBrowser: Boolean) {
-    this.appService = AppService.getInstance();
+  constructor(private api: ApiService, @Inject('isBrowser') private isBrowser: Boolean, private appService: AppService) {
   }
 
   ngOnInit() {

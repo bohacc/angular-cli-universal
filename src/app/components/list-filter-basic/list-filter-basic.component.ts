@@ -19,7 +19,6 @@ export class ListFilterBasic {
   items: Array<ISelectBox> = [];
   defaultItems: Array<ISelectBox> = [];
   loading: Boolean;
-  appService: AppService;
   httpTimeout: any;
   httpSubscription: any;
   defaultItem: ISelectBox = {id: '', name: '', val: ''};
@@ -28,8 +27,7 @@ export class ListFilterBasic {
   cat: number = 0;
 
 
-  constructor(private api: ApiService, private translate: TranslateService) {
-    this.appService = AppService.getInstance();
+  constructor(private api: ApiService, private translate: TranslateService, private appService: AppService) {
   }
 
   ngOnInit() {

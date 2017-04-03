@@ -15,12 +15,8 @@ declare var $: any;
 
 export class RecordProduct {
   product: any = {};
-  appService: AppService;
-  toolsService: ToolsService;
 
-  constructor(private router: Router, private api: ApiService, private _elRef: ElementRef) {
-    this.appService = AppService.getInstance();
-    this.toolsService = ToolsService.getInstance();
+  constructor(private router: Router, private api: ApiService, private _elRef: ElementRef, private appService: AppService) {
   }
 
   ngOnInit() {

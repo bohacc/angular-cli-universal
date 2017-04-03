@@ -19,7 +19,6 @@ export class RecordPart {
   @Output('onBuy') onBuy = new EventEmitter();
   @Output('onOpenAssist') onOpenAssist = new EventEmitter();
   @ViewChild(Carousel) carousel: Carousel;
-  toolsService: ToolsService;
   amount: string;
   inProcess: Boolean = false;
   popupAssistShow: Boolean = false;
@@ -29,11 +28,8 @@ export class RecordPart {
   formatNumber1: string;
   formatNumber2: string;
   store: any = {user: {}};
-  appService: AppService;
 
-  constructor(private router: Router, private _elRef: ElementRef,  private api: ApiService) {
-    this.appService = AppService.getInstance();
-    this.toolsService = ToolsService.getInstance();
+  constructor(private router: Router, private _elRef: ElementRef,  private api: ApiService, private toolsService: ToolsService, private appService: AppService) {
     this.formatNumber1 = Constants.FORMAT_NUMBER_1;
     this.formatNumber2 = Constants.FORMAT_NUMBER_2;
   }
