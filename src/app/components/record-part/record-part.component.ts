@@ -40,7 +40,7 @@ export class RecordPart {
   }
 
   ngOnChanges(changes) {
-    if (changes.product.currentValue && changes.product.currentValue.pictures) {
+    if (changes.product && changes.product.currentValue && changes.product.currentValue.pictures) {
       this.isLoaded = true;
       this.smallPictures = changes.product.currentValue.pictures.filter(function (el) { return el.type === Constants.IMAGE_SMALL_TYPE});
       this.bigPictures = [];

@@ -1,7 +1,6 @@
 <!-- SHOP CATEGORIES AT -->
 <div id="shop_cats_full" [ngClass]="{'shop_cats_full': store['showCats']}">
-  <nav class="shop_categories" *ngIf="store[field]" [ngClass]="{opened: menuIsShowMobile('CATS-1')}" menu-set-active
-       (onCollapseAll)="onCollapseAll($event)" (onDefaultAction)="onDefaultAction($event)">
+  <nav class="shop_categories" #selectElem [ngClass]="{hide: !store[field], opened: menuIsShowMobile('CATS-1')}">
     <h2 (click)="menuShowItemsMobile('CATS-1')">LED PRODUKTE</h2>
     <ul>
 
@@ -26,7 +25,7 @@
             <a [routerLink]="['/led-leuchtmittel-tropfen']">Tropfen</a>
           </li>
           <li>
-            <a [routerLink]="['/led-leuchtmittel-kapseln']">Kapseln</a>  
+            <a [routerLink]="['/led-leuchtmittel-kapseln']">Kapseln</a>
           </li>
           <li>
             <a [routerLink]="['/led-leuchtmittel-globe']">Globe</a>
@@ -465,7 +464,7 @@
       <li [ngClass]="{'opened': menuIsShow('/led-industriebeleuchtung')}">
         <a [routerLink]="['/led-industriebeleuchtung']" class="childs">LED INDUSTRIEBELEUCHTUNG</a>
         <span class="toggle" (click)="menuShowItems('/led-industriebeleuchtung')"></span>
-        <ul>		
+        <ul>
 			<li [ngClass]="{'opened': menuIsShow('/led-industriebeleuchtung-fluter')}">
             <a [routerLink]="['/led-industriebeleuchtung-fluter']">FLUTER</a>
             <span class="toggle" (click)="menuShowItems('/led-industriebeleuchtung-fluter')"></span>
@@ -475,16 +474,16 @@
 				</li>
 				<li>
 				<a [routerLink]="['/led-industriebeleuchtung-fluter-troll']">Troll</a>
-				</li>	
+				</li>
 				<li>
 				<a [routerLink]="['/led-industriebeleuchtung-fluter-orion']">Orion</a>
 				</li>
 				<li>
 				<a [routerLink]="['/led-industriebeleuchtung-fluter-gama']">Gama</a>
-				</li>			
+				</li>
 				<li>
 				<a [routerLink]="['/led-industriebeleuchtung-fluter-flash']">Flash</a>
-				</li>	
+				</li>
 <!--			<li>
 				<a [routerLink]="['/led-industriebeleuchtung-fluter-ledstream']">LEDstream</a>
 				</li> -->
@@ -495,23 +494,23 @@
 				<a [routerLink]="['/led-industriebeleuchtung-fluter-star']">Star</a>
 				</li>
 			  </ul>
-			</li>			
+			</li>
 			<li [ngClass]="{'opened': menuIsShow('/led-industriebeleuchtung-fluter-sensor')}">
             <a [routerLink]="['/led-industriebeleuchtung-fluter-sensor']">FLUTER INKL. SENSOR</a>
             <span class="toggle" (click)="menuShowItems('/led-industriebeleuchtung-fluter-sensor')"></span>
-              <ul>	
+              <ul>
 				<li>
 				<a [routerLink]="['/led-industriebeleuchtung-fluter-sensor-troll-d']">Troll D</a>
 				</li>
 			  </ul>
-			</li>			
+			</li>
 			<li [ngClass]="{'opened': menuIsShow('/led-industriebeleuchtung-hallenleuchten')}">
             <a [routerLink]="['/led-industriebeleuchtung-hallenleuchten']">HALLENLEUCHTEN</a>
             <span class="toggle" (click)="menuShowItems('/led-industriebeleuchtung-hallenleuchten')"></span>
 			  <ul>
 				<li>
 				<a [routerLink]="['/led-industriebeleuchtung-hallenleuchten-tedtec']">LEDtec</a>
-				</li>			  
+				</li>
 <!--			<li>
 				<a [routerLink]="['/led-industriebeleuchtung-hallenleuchten-tedpot']">LEDpot</a>
 				</li> -->
@@ -526,7 +525,7 @@
 			<li [ngClass]="{'opened': menuIsShow('/led-industriebeleuchtung-feuchtraumleuchten')}">
             <a [routerLink]="['/led-industriebeleuchtung-feuchtraumleuchten']">FEUCHTRAUMLEUCHTEN</a>
             <span class="toggle" (click)="menuShowItems('/led-industriebeleuchtung-feuchtraumleuchten')"></span>
-              <ul>	
+              <ul>
 <!--			<li>
 				<a [routerLink]="['/led-industriebeleuchtung-feuchtraumleuchten-ledheaven']">LEDheaven</a>
 				</li> -->
@@ -534,7 +533,7 @@
 				<a [routerLink]="['/led-industriebeleuchtung-feuchtraumleuchten-comet']">Comet</a>
 				</li>
 			  </ul>
-			</li>			
+			</li>
 			<li>
             <a [routerLink]="['/led-industriebeleuchtung-zubehoer']">Zubehör</a>
 			</li>

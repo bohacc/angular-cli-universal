@@ -1,7 +1,6 @@
 <!-- SHOP CATEGORIES - DEV -->
 <div id="shop_cats_full" [ngClass]="{'shop_cats_full': store['showCats']}">
-  <nav class="shop_categories" *ngIf="store[field]" [ngClass]="{opened: menuIsShowMobile('CATS-1')}" menu-set-active
-       (onCollapseAll)="onCollapseAll($event)" (onDefaultAction)="onDefaultAction($event)">
+  <nav class="shop_categories" #selectElem [ngClass]="{hide: !store[field], opened: menuIsShowMobile('CATS-1')}" >
     <h2 (click)="menuShowItemsMobile('CATS-1')">LED produkty</h2>
     <ul>
       <li [ngClass]="{'opened': menuIsShow('/led-svetelne-zdroje')}">

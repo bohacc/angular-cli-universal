@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Inject, ElementRef} from '@angular/core';
+import {Component, OnInit, Input, Inject, ElementRef, ViewChild} from '@angular/core';
 
 import {AppService} from "../../modules/app.service";
 import { SideMenu } from '../../services/side-menu.service';
@@ -11,6 +11,7 @@ declare var $: any;
 
 export class ShopCategoriesDev implements OnInit, SideMenu{
   @Input('typeShowing') typeShowing: string;
+  @ViewChild('selectElem') _elRef: ElementRef;
   store: any;
   field: string;
   menuShows: Array<string> = [];
@@ -18,14 +19,15 @@ export class ShopCategoriesDev implements OnInit, SideMenu{
 
   constructor(
     private appService: AppService,
-    @Inject('isBrowser') private isBrowser: Boolean,
-    private _elRef: ElementRef
+    @Inject('isBrowser') private isBrowser: Boolean
   ) {}
 
   ngOnInit() {
     this.store = this.appService.getStore();
     this.field = this.typeShowing; //'showCatsMobile'
-    this.setActive();
+    setTimeout(() => {
+      this.setActive();
+    }, 200);
   }
 
   menuShowItems(item: string) {
