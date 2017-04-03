@@ -165,7 +165,7 @@ export class AppService {
   }
 
   getRootPath() {
-    return this.isBrowser ? '' : '';//Constants.ROOT_PATH;
+    return this.isBrowser ? '' : Constants.ROOT_PATH;
   }
 
   clearPayment() {
