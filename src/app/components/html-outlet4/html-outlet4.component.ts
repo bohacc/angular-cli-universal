@@ -128,7 +128,7 @@ export class HtmlOutlet4 {
   }
 
   ngOnChanges() {
-    //this.updateComponent();
+    this.updateComponent();
   }
 
   ngAfterViewChecked() {

@@ -37,10 +37,10 @@ import {Cmp} from "../cmp/cmp.component";
   template:
     '<div *ngIf="isComponentType==2">' +
     '  <ng-container *ngComponentOutlet="obj" content="args"></ng-container>' +
+    '</div>' +
+    '<div *ngIf="isComponentType==1">' +
+    '  <dcl-wrapper-other [html]="html" [args]="args"></dcl-wrapper-other>' +
     '</div>'
-    /*'<div *ngIf="isComponentType==1">' +
-    '  <dcl-wrapper-other [type]="obj" [html]="html" [args]="args"></dcl-wrapper-other>' +
-    '</div>'*/
     /*'<dynamic-html-outlet *ngIf="isComponentType==1" [html]="html"></dynamic-html-outlet>'*/
     /*'<dcl-wrapper *ngIf="isComponentType==2" [type]="obj" [html]="html" [args]="args"></dcl-wrapper> '*/
     /*'<dcl-wrapper-other *ngIf="isComponentType==1" [html]="html" [args]="args"></dcl-wrapper-other>'*/
