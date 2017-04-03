@@ -1,7 +1,6 @@
 <!-- SHOP CATEGORIES -->
 <div id="shop_cats_full" [ngClass]="{'shop_cats_full': store['showCats']}">
-  <nav class="shop_categories" *ngIf="store[field]" [ngClass]="{opened: menuIsShowMobile('CATS-1')}" menu-set-active
-       (onCollapseAll)="onCollapseAll($event)" (onDefaultAction)="onDefaultAction($event)">
+  <nav class="shop_categories" #selectElem [ngClass]="{hide: !store[field], opened: menuIsShowMobile('CATS-1')}">
     <h2 (click)="menuShowItemsMobile('CATS-1')">LED PRODUKTY</h2>
     <ul>
 
@@ -465,7 +464,7 @@
       <li [ngClass]="{'opened': menuIsShow('/led-prumyslova-svitidla')}">
         <a [routerLink]="['/led-prumyslova-svitidla']" class="childs">LED PRŮMYSLOVÁ SVÍTIDLA</a>
         <span class="toggle" (click)="menuShowItems('/led-prumyslova-svitidla')"></span>
-        <ul>		
+        <ul>
 			<li [ngClass]="{'opened': menuIsShow('/led-prumyslova-svitidla-reflektory')}">
             <a [routerLink]="['/led-prumyslova-svitidla-reflektory']">REFLEKTORY</a>
             <span class="toggle" (click)="menuShowItems('/led-prumyslova-svitidla-reflektory')"></span>
@@ -475,16 +474,16 @@
 				</li>
 				<li>
 				<a [routerLink]="['/led-prumyslova-svitidla-reflektory-troll']">Troll</a>
-				</li>	
+				</li>
 				<li>
 				<a [routerLink]="['/led-prumyslova-svitidla-reflektory-orion']">Orion</a>
 				</li>
 				<li>
 				<a [routerLink]="['/led-prumyslova-svitidla-reflektory-gama']">Gama</a>
-				</li>			
+				</li>
 				<li>
 				<a [routerLink]="['/led-prumyslova-svitidla-reflektory-flash']">Flash</a>
-				</li>	
+				</li>
 				<li>
 				<a [routerLink]="['/led-prumyslova-svitidla-reflektory-ledstream']">LEDstream</a>
 				</li>
@@ -495,23 +494,23 @@
 				<a [routerLink]="['/led-prumyslova-svitidla-reflektory-star']">Star</a>
 				</li>
 			  </ul>
-			</li>			
+			</li>
 			<li [ngClass]="{'opened': menuIsShow('/led-prumyslova-svitidla-senzorova')}">
             <a [routerLink]="['/led-prumyslova-svitidla-senzorova']">SENZOROVÉ REFLEKTORY</a>
             <span class="toggle" (click)="menuShowItems('/led-prumyslova-svitidla-senzorova')"></span>
-              <ul>	
+              <ul>
 				<li>
 				<a [routerLink]="['/led-prumyslova-svitidla-senzorova-troll-d']">Troll D</a>
 				</li>
 			  </ul>
-			</li>			
+			</li>
 			<li [ngClass]="{'opened': menuIsShow('/led-prumyslova-svitidla-halova')}">
             <a [routerLink]="['/led-prumyslova-svitidla-halova']">HALOVÁ SVÍTIDLA</a>
             <span class="toggle" (click)="menuShowItems('/led-prumyslova-svitidla-halova')"></span>
 			  <ul>
 				<li>
 				<a [routerLink]="['/led-prumyslova-svitidla-halova-ledtec']">LEDtec</a>
-				</li>			  
+				</li>
 				<li>
 				<a [routerLink]="['/led-prumyslova-svitidla-halova-ledpot']">LEDpot</a>
 				</li>
@@ -526,7 +525,7 @@
 			<li [ngClass]="{'opened': menuIsShow('/led-prumyslova-svitidla-prachotesna')}">
             <a [routerLink]="['/led-prumyslova-svitidla-prachotesna']">PRACHOTĚSNÁ SVÍTIDLA</a>
             <span class="toggle" (click)="menuShowItems('/led-prumyslova-svitidla-prachotesna')"></span>
-              <ul>	
+              <ul>
 				<li>
 				<a [routerLink]="['/led-prumyslova-svitidla-prachotesna-ledheaven']">LEDheaven</a>
 				</li>
@@ -534,7 +533,7 @@
 				<a [routerLink]="['/led-prumyslova-svitidla-prachotesna-comet']">Comet</a>
 				</li>
 			  </ul>
-			</li>			
+			</li>
 			<li>
             <a [routerLink]="['/led-prumyslova-svitidla-prislusenstvi']">Příslušenství</a>
 			</li>

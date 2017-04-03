@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, ElementRef, Inject} from '@angular/core';
 
 //import { CatsOnMobileTablet } from '../cats-on-mobile-tablet/cats-on-mobile-tablet';
 //import { MenuToggle } from '../menu-toggle/menu-toggle';
 import {AppService} from "../../modules/app.service";
 import { SideMenu } from '../../services/side-menu.service';
 //import { MenuSetActive } from '../menu-set-active/menu-set-active.component';
+declare var $: any;
 
 @Component({
   selector: 'shop-categories-at',
@@ -18,12 +19,16 @@ export class ShopCategoriesAt implements OnInit, SideMenu{
   menuShows: Array<string> = [];
   menuShowsMobile: Array<string> = [];
 
-  constructor(private appService: AppService) {}
+  constructor(
+    private appService: AppService,
+    @Inject('isBrowser') private isBrowser: Boolean,
+    private _elRef: ElementRef
+  ) {}
 
   ngOnInit() {
-    let store = this.appService.getStore();
+    this.store = this.appService.getStore();
     this.field = this.typeShowing; //'showCatsMobile'
-    this.store = store;
+    this.setActive();
   }
 
   // SIDE MENU
@@ -59,5 +64,40 @@ export class ShopCategoriesAt implements OnInit, SideMenu{
 
   onDefaultAction(arg: Array<string>) {
     this.menuShows = arg;
+  }
+
+  setActive() {
+    if (this.isBrowser) {
+      $(this._elRef.nativeElement)
+        .find('li')
+        .addClass('active')
+        .removeClass('active')
+        .removeClass('opened');
+
+      $(this._elRef.nativeElement)
+        .find('a[href="/' + this.appService.getPath() + '"]')
+        .parents('li')
+        .addClass('active')
+        .addClass('opened');
+
+      let arr = this.getActiveItemsAnchorsArr();
+      this.onDefaultAction(arr);
+    }
+  }
+
+  getActiveItemsAnchorsArr(): Array<string> {
+    let arr = [];
+    if (this.isBrowser) {
+      $(this._elRef.nativeElement)
+        .find('a[href="/' + this.appService.getPath() + '"]')
+        .parents('li')
+        .each(function (el) {
+          let url = $(this).find('a').attr('href');
+          if (url) {
+            arr.push(url);
+          }
+        })
+    }
+    return arr;
   }
 }
