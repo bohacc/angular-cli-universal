@@ -3,6 +3,7 @@ export var COUNTRIES_VERSION = [
   {CODE: 'CZ', URL: 'cz.mcled.cz', numberDigitsRound: 1, assistEmail: 'support@mcled.cz'},
   {CODE: 'CZ', URL: 'localhost', numberDigitsRound: 1, assistEmail: 'support@mcled.cz'},
   {CODE: 'CZ', URL: 'new.mcled.cz', numberDigitsRound: 1, assistEmail: 'support@mcled.cz'},
+  {CODE: 'CZ', URL: 'test.mcled.cz', numberDigitsRound: 1, assistEmail: 'support@mcled.cz'},
   {CODE: 'DE', URL: 'at.mcled.cz', numberDigitsRound: 2, assistEmail: 'mcled.support@schmachtl.at'}
 ];
 export var SECURE_FORM_CODE = 'c18d7b974296b9802ac76fad298ffcbe';
