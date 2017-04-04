@@ -2,9 +2,6 @@ import { CommonModule } from '@angular/common';
 import {LOCALE_ID, NgModule} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule, PreloadAllModules } from '@angular/router';
-
-import { TransferHttpModule } from './transfer-http/transfer-http.module';
 
 import { MainComponent } from '../components/main/main.component';
 import {Home} from "../components/home/home.component";
@@ -108,9 +105,6 @@ import {HtmlOutlet} from "../components/html-outlet/html-outlet.component";
 import {Cmp} from "../components/cmp/cmp.component";
 import {ToolsService} from "../services/tools.service";
 import {AppService} from "./app.service";
-import {MainModule} from "./main.module";
-import {DynamicComponentModule, DynamicComponentModuleFactory} from "angular2-dynamic-component";
-import {BrowserModule} from "@angular/platform-browser";
 
 @NgModule({
   declarations: [
@@ -249,8 +243,7 @@ import {BrowserModule} from "@angular/platform-browser";
     CommonModule,
     FormsModule,
     HttpModule,
-    routing,
-    DynamicComponentModule
+    routing
   ],
   providers: [
     appRoutingProviders,

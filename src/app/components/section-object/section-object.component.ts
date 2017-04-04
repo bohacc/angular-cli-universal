@@ -33,10 +33,7 @@ import {Tools} from "../../../backend/tools";
 import {Cmp} from "../cmp/cmp.component";
 import {BrowserModule} from "@angular/platform-browser";
 import {FormsModule} from "@angular/forms";
-import {RouterModule} from "@angular/router";
-import {DynamicComponentModule} from "angular2-dynamic-component";
 import {CommonModule} from "@angular/common";
-import {routing} from "../../modules/app.routing";
 
 @Component({
   selector: 'section-object',
@@ -63,13 +60,6 @@ export class SectionObject {
   self = this;
   obj: any;
   isComponentType: number = 0;
-  selfx = this;
-  dynamicModules: [
-    CommonModule,
-    FormsModule,
-    HttpModule,
-    BrowserModule
-    ];
 
   constructor(private http: Http, private appService: AppService) {
 
