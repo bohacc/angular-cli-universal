@@ -1,7 +1,6 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/distx
 /tmp
 
 # dependencies
@@ -41,3 +40,21 @@ testem.log
 Thumbs.db
 
 /src/aot
+
+
+# notia
+mcled_website_v3_err.log
+mcled_website_v3_out.log
+nohup.out
+
+files/*
+.htaccess*
+templates/*.jpg
+templates/*.png
+
+etim-export-skup-V3.xml
+etim-export-skup-V3AT.xml
+etim-export-V3.xml
+etim-export-V3AT.xml
+
+/download
