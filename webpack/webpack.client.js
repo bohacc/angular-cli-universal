@@ -18,9 +18,9 @@ module.exports = {
     "polyfills": [
       "./src/polyfills.ts"
     ],
-    "styles": [
+    /*"styles": [
       "./src/styles.css"
-    ]
+    ]*/
   },
   "output": {
     "path": path.join(process.cwd(), "dist"),
@@ -64,9 +64,9 @@ module.exports = {
     new CommonsChunkPlugin({
       "name": "vendor",
       "minChunks": (module) => module.resource && module.resource.startsWith(nodeModules),
-      "chunks": [
+      "chunks";: [
         "main"
-      ]
+      ];
     })
   ]
-};
+}

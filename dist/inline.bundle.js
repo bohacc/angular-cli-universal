@@ -32,7 +32,7 @@
 /******/
 /******/ 	// objects to store loaded and loading chunks
 /******/ 	var installedChunks = {
-/******/ 		4: 0
+/******/ 		3: 0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -92,8 +92,9 @@
 /******/ 				if(chunk) chunk[1](new Error('Loading chunk ' + chunkId + ' failed.'));
 /******/ 				installedChunks[chunkId] = undefined;
 /******/ 			}
-/******/ 		};
-/******/
+      /******/
+    }
+    /******/
 /******/ 		var promise = new Promise(function(resolve, reject) {
 /******/ 			installedChunks[chunkId] = [resolve, reject];
 /******/ 		});

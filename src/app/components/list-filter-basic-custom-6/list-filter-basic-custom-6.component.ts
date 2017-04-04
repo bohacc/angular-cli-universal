@@ -20,6 +20,7 @@ export class ListFilterBasicCustom6 {
       {id: 'MC000002:25 W', name: '25 W', val: 'MC000002:25 W'},
       {id: 'MC000002:35 W', name: '35 W', val: 'MC000002:35 W'},
       {id: 'MC000002:50 W', name: '50 W', val: 'MC000002:50 W'},
+      {id: 'MC000002:65 W', name: '65 W', val: 'MC000002:65 W'},
     ];
   }
 
@@ -31,5 +32,9 @@ export class ListFilterBasicCustom6 {
   onSelectItemComboBox(code: string, item: ISelectBox) {
     this.selectedItems = this.appService.getSelectItemParamComboBox(code, item, this.selectedItems);
     this.onSelectItemOut.emit({id: item.id, name: item.name, val: item.val, type: 2, code: code});
+  }
+
+  resetFilter() {
+    this.selectedItems = [];
   }
 }

@@ -71,8 +71,13 @@
     {{'Dodání do svou pracovních dní při objednávce do 10 hodin.' | translate}}<br>
     {{'Zboží bude odesláno a fakturováno firmou McLED s.r.o. (Česká republika).' | translate}}
   </p>
-  <div class="order_actions">
+  <div class="order_actions" *ngIf="!inProcess">
     <a routerLink="{{'/shipping-and-payment' | translate}}" class="lui_button prev light fa_b_chevron-left mobile_big">{{'Zpět' | translate}}</a>
     <a href="javascript:void(0);" (click)="order()" class="lui_button next bold info fa_a_chevron-right mobile_big">{{'Odeslat objednávku' | translate}}</a>
+  </div>
+  <div class="spinner" *ngIf="inProcess">
+    <span>
+      <img src="/images/loader.gif" />
+    </span>
   </div>
 </div>

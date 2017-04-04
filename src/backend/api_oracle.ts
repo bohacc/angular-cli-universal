@@ -8,8 +8,6 @@ import { Connections } from './connections';
 export module Oracledb {
   export function select(sql, vals, req, connectData, obj) {
     return new Promise(function (resolve, reject) {
-      //console.log(oracle);
-      //console.log(Promise);
       oracle.fetchAsString = [ oracle.CLOB ];
       // connection instance to database from obj
       if (obj && obj.connection) {
@@ -103,8 +101,7 @@ export module Oracledb {
         );
       }
     });
-  };
-
+  }
   export function executeSQL(sql, vals, req, connectData, obj) {
     return new Promise(function (resolve, reject) {
       if (obj && obj.connection) {
@@ -265,8 +262,7 @@ export module Oracledb {
         );
       }
     });
-  };
-
+  }
   export function sendBlob(sql, vals, req, connectData, obj, res) {
     var connectionObj = connectData || Connections.getConnection(req);
     //oracle.lobPrefetchSize = 120000;

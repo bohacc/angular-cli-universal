@@ -12,6 +12,7 @@ export class ListSimple {
   @Input() rowsonpage: number;
   products: Array<Object> = [];
   notFoundText: string = Constants.NOT_FOUND_TEXT;
+  isLoaded: Boolean = false;
 
   constructor(private api: ApiService, private appService: AppService) {
   }
@@ -21,10 +22,17 @@ export class ListSimple {
   }
 
   getData() {
+    this.isLoaded = false;
     this.api.get('/products/list/' + this.appService.getPath() + this.getMeta())
-      .subscribe(data => {
-        this.products = data.json();
-      });
+      .subscribe(
+        data => {
+          this.products = data.json();
+          this.isLoaded = true;
+        },
+        err => {
+          this.isLoaded = true;
+        }
+      );
   }
 
   getMeta() {

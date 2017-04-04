@@ -12,11 +12,13 @@ export class ListFilter {
   @Input() meta: any;
   @Output('onChangeFilterAdvanced') onChangeFilterAdvancedOut = new EventEmitter<Array<IListFilter>>();
   @Output('onChangeFilterBasic') onChangeFilterBasicOut = new EventEmitter<Array<IListFilter>>();
+  @Output('onResetFilter') onResetFilter = new EventEmitter();
 
   constructor(private http: Http) {}
 
   public setTabState(index) {
     this.tabsState = index;
+    this.onTabsSet();
   }
 
   onChangeFilterAdvanced(meta: Array<IListFilter>) {
@@ -25,5 +27,9 @@ export class ListFilter {
 
   onChangeFilterBasic(meta: Array<IListFilter>) {
     this.onChangeFilterBasicOut.emit(meta);
+  }
+
+  onTabsSet() {
+    this.onResetFilter.emit();
   }
 }

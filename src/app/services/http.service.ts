@@ -2,7 +2,6 @@ import {Http, ConnectionBackend, RequestOptions, Request, RequestOptionsArgs, Re
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
 import {Inject, Injectable} from "@angular/core";
-//import { isBrowser } from 'angular2-universal';
 
 declare var Zone: any;
 

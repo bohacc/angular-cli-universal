@@ -4,15 +4,10 @@ import './polyfills';
 import 'reflect-metadata';
 import 'rxjs/Rx';
 
-import { platformServer, renderModuleFactory } from '@angular/platform-server';
 import { AppServerModule } from './app/modules/app.server.module';
 import { ngExpressEngine } from './app/modules/ng-express-engine/express-engine';
 
 import * as express from 'express';
-/*import { App } from './api/app';*/
-import { ROUTES } from './routes';
-
-import * as path from 'path';
 
 import * as api from './backend/api';
 import { Tools } from './backend/tools';
@@ -59,8 +54,6 @@ app.use(function (req, res, next) {
 });*/
 
 app.use('/', express.static('dist', {index: false}));
-//app.use('/assets', express.static(path.join(__dirname, 'src/assets'), {maxAge: 0}));
-
 app.use('/assets', express.static('src/assets', {maxAge: 0}));
 app.use('/tools', express.static('tools', {maxAge: 0}));
 app.use('/templates', express.static('templates', {maxAge: 0}));
@@ -69,8 +62,8 @@ app.use('/examples', express.static('examples', {maxAge: 0}));
 app.use('/files', express.static('files', {maxAge: 0}));
 //app.use('/etim', express.static(path.join(__dirname, '../'), {maxAge: 0}));
 
-
 app.get('/meta', api.metaTags);
+app.get('/meta/:code', api.metaTags);
 app.get('/language', api.language);
 app.get('/tryCatch.js.map', function (req, res, next) {res.send('');});
 app.get('/web_get_img_data', api.emptyImage);
@@ -134,15 +127,6 @@ app.get('/products/:id/product-list/pdf', api.productDataListPdf);
 app.post('/assist/message', api.assistMessage);
 app.post('/lost-password', api.lostPassword);
 
-
-app.get('/data', (req, res) => {
-  // tslint:disable-next-line:no-console
-  console.time(`GET: ${req.originalUrl}`);
-  res.json({greeting: 'greeting', name: 'name'});
-  // tslint:disable-next-line:no-console
-  console.timeEnd(`GET: ${req.originalUrl}`);
-});
-
 let ngApp = (req, res) => {
   res.render('index', {
     req: req,
@@ -162,20 +146,6 @@ app.get('*', function(req, res) {
   var json = JSON.stringify(pojo, null, 2);
   res.status(404).send(json);
 });
-
-/*ROUTES.forEach(route => {
-  app.get(route, (req, res) => {
-    // tslint:disable-next-line:no-console
-    console.time(`GET: ${req.originalUrl}`);
-    res.render('index', {
-      req: req,
-      res: res
-    });
-    // tslint:disable-next-line:no-console
-    console.timeEnd(`GET: ${req.originalUrl}`);
-  });
-});*/
-
 
 app.listen(port, () => {
   console.log(`Listening at ${baseUrl}`);

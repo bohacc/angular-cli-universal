@@ -33,15 +33,42 @@ export module Tools {
     return result;
   }
 
-  export function validatePhone(value: string): Boolean {
+  export function validatePhone(value: string, language: string): Boolean {
     var re = /^(\+420)? ?[0-9]{3} ?[0-9]{3} ?[0-9]{3}$/,
       result = value ? re.test(value) : true;
+    if (language == 'DE') {
+      result = true;
+    }
     return result;
   }
 
-  export function validateZip(value: string): Boolean {
+  export function validateZip(value: string, language: string): Boolean {
     var re = /^[0-9]{3} ?[0-9]{2}$/,
       result = value ? re.test(value) : true;
+    if (language == 'DE') {
+      re = /^[0-9]{4,8}$/;
+      result = value ? re.test(value) : true;
+    }
+    return result;
+  }
+
+  export function validateRegId(value: string, language: string): Boolean {
+    var re = /^[0-9]{8}$/,
+      result = value ? re.test(value) : true;
+    if (language == 'DE') {
+      re = /^[0-9]{4,8}$/;
+      result = value ? re.test(value) : true;
+    }
+    return result;
+  }
+
+  export function validateVatId(value: string, language: string): Boolean {
+    var re = /^[a-zA-Z0-9]{8,10}$/,
+      result = value ? re.test(value) : true;
+    if (language == 'DE') {
+      re = /^[a-zA-Z0-9]{8,10}$/;
+      result = value ? re.test(value) : true;
+    }
     return result;
   }
 
@@ -152,6 +179,15 @@ export module Tools {
     }
   }
 
+  export function addPropsFromArr(rec: any, arr: Array<any>, pkRec: string, pkArr: string) {
+    arr.map(function (el) {
+      if (el[pkArr] == rec[pkRec]) {
+        for (let key in el) {
+          rec[key] = el[key];
+        }
+      }
+    });
+  }
 /*  export function sendEmail (obj) {
     var transporter = nodemailer.createTransport({
       host: Constants.MAILER.HOST,

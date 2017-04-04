@@ -31,4 +31,8 @@ export class ListFilterBasicCustom3 {
     this.selectedItems = this.appService.getSelectItemParamComboBox(code, item, this.selectedItems);
     this.onSelectItemOut.emit({id: item.id, name: item.name, val: item.val, type: 2, code: code});
   }
+
+  resetFilter() {
+    this.selectedItems = [];
+  }
 }

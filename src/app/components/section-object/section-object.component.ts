@@ -39,10 +39,10 @@ import {CommonModule} from "@angular/common";
   selector: 'section-object',
   template:
     '<div *ngIf="isComponentType==2">' +
-    '  <ng-container *ngComponentOutlet="obj" content="args"></ng-container>' +
+    '  <ng-container *htmlOutlet="obj; args: args"></ng-container>' +
     '</div>' +
     '<div *ngIf="isComponentType==1">' +
-    '  <dcl-wrapper-other [html]="html" [args]="args"></dcl-wrapper-other>' +
+    '  <html-outlet-4 [html]="html" [args]="args"></html-outlet-4>' +
     '</div>'
 })
 
@@ -131,7 +131,6 @@ export class SectionObject {
       this.http.get(this.appService.getRootPath() + '/templates/' + this.src + '?' + Math.random()).subscribe((res) => {
         this.html = res.text();
         this.isComponentType = 1;
-        this.obj = Cmp;
       });
     } else if (this.pos == 3 && (this.objectID === 'ZAZNAM_PRODUKTU_NG2' || this.objectID === '6371')) {
       this.isComponentType = 2;

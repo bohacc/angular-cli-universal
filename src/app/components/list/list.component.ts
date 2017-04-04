@@ -72,6 +72,7 @@ export class List {
 
   getData() {
     let _this = this;
+    _this.products = [];
     if (this.httpTimeout) {
       clearTimeout(this.httpTimeout);
     }
@@ -232,5 +233,10 @@ export class List {
       }
     }
     return params;
+  }
+
+  onResetFilter() {
+    this.onChangeFilterBasic([]);
+    this.onChangeFilterAdvanced([]);
   }
 }

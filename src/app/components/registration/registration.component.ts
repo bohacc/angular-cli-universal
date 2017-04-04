@@ -256,7 +256,7 @@ export class Registration {
       alert(this.translate.instant(Constants.MESSAGE_PHONE_NOT_FILLED));
       return false;
     }
-    if (this.user.phone && !Tools.validatePhone(this.user.phone)) {
+    if (this.user.phone && !Tools.validatePhone(this.user.phone, this.store.language)) {
       alert(this.translate.instant(Constants.MESSAGE_PHONE_VALIDATE));
       return false;
     }
@@ -272,11 +272,11 @@ export class Registration {
       alert(this.translate.instant(Constants.MESSAGE_ZIP_NOT_FILLED));
       return false;
     }
-    if (this.user.zip && !Tools.validateZip(this.user.zip)) {
+    if (this.user.zip && !Tools.validateZip(this.user.zip, this.store.language)) {
       alert(this.translate.instant(Constants.MESSAGE_ZIP_VALIDATE));
       return false;
     }
-    if (this.user.toCompany && !this.validateCompany()) {
+    if (this.store.isAustria && !this.validateCompany()) { // this.user.toCompany DOCASNE NEZ SE UDELA FINALNI VERZE NAVRHU PRO CZ
       return false;
     }
 
@@ -301,7 +301,7 @@ export class Registration {
       alert(this.translate.instant(Constants.MESSAGE_ZIP_NOT_FILLED));
       return false;
     }
-    if (this.user.deliveryIsNotInvoice && this.user.zipDelivery && !Tools.validateZip(this.user.zipDelivery)) {
+    if (this.user.deliveryIsNotInvoice && this.user.zipDelivery && !Tools.validateZip(this.user.zipDelivery, this.store.language)) {
       alert(this.translate.instant(Constants.MESSAGE_ZIP_VALIDATE));
       return false;
     }
@@ -314,19 +314,27 @@ export class Registration {
       alert(this.translate.instant(Constants.MESSAGE_COMPANY_NAME_NOT_FILLED));
       return false;
     }
-    if (this.user.conditions) {
+    if (this.store.isAustria) { // this.user.conditions DOCASNE NEZ SE UDELA FINALNI VERZE NAVRHU PRO CZ
       if (!this.user.regId) {
         alert(this.translate.instant(Constants.MESSAGE_REGID_NOT_FILLED));
+        return false;
+      }
+      if (this.user.regId && !Tools.validateRegId(this.user.regId, this.store.language)) {
+        alert(this.translate.instant(Constants.MESSAGE_REGID_VALIDATE));
         return false;
       }
       if (!this.user.vatId) {
         alert(this.translate.instant(Constants.MESSAGE_VATID_NOT_FILLED));
         return false;
       }
-      if (this.store.isAustria && this.user.vatId && (this.user.vatId.length < 7 || this.user.vatId.length > 12)) {
+      if (this.user.vatId && !Tools.validateVatId(this.user.vatId, this.store.language)) {
         alert(this.translate.instant(Constants.MESSAGE_VATID_VALIDATE));
         return false;
       }
+      /*if (this.store.isAustria && this.user.vatId && (this.user.vatId.length < 8 || this.user.vatId.length > 10)) {
+        alert(this.translate.instant(Constants.MESSAGE_VATID_VALIDATE));
+        return false;
+      }*/
     }
     return true;
   }
@@ -357,7 +365,6 @@ export class Registration {
   }
 
   onSelectSex(item: any, model: string) {
-    console.log('onSelectSex');
     this.user[model] = item.sex;
     this.user.sexNamePrefix = this.translate.instant(item.val);
   }
@@ -384,7 +391,7 @@ export class Registration {
   registrationSuccess() {
     if (!this.openConditionsDialog()) {
       this.successPage();
-    };
+    }
   }
 
   successPage() {
@@ -414,7 +421,7 @@ export class Registration {
   }
 
   setLocalize() {
-    this.placeholderRegId = this.store.isAustria ? 'FN 99999d' : '';
-    this.placeholderVatId = this.store.isAustria ? 'ATU 99999999' : '';
+    this.placeholderRegId = this.store.isAustria ? '999999' : '';
+    this.placeholderVatId = this.store.isAustria ? 'ATU999999' : '';
   }
 }

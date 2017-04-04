@@ -13,6 +13,7 @@ import {TranslateService} from "../../pipes/translate/translate.service";
 })
 export class ListFilterAdvanced {
   @Input('filters') filters: Array<ISelectBox> = [];
+  @Input('isShow') isShow: Boolean = false;
   @Output('onChangeFilter') onChangeFilter = new EventEmitter<Array<IListFilter>>();
   items: Array<ISelectBox> = [];
   defaultItems: Array<ISelectBox> = [];
@@ -69,8 +70,10 @@ export class ListFilterAdvanced {
 
   onSelectItemComboBox(code: string, item: ISelectBox) {
     this.selectedItems = this.appService.getSelectItemParamComboBox(code, item, this.selectedItems);
-    this.getData();
-    this.emit();
+    if (item.id) {
+      this.getData();
+      this.emit();
+    }
   }
 
   getFilters(): Array<IListFilter> {

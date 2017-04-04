@@ -3,21 +3,17 @@ import {
   NgModule, Component, Compiler, ViewContainerRef, ViewChild, Input, ComponentRef, ComponentFactory,
   ComponentFactoryResolver, ElementRef, LOCALE_ID, Inject
 } from '@angular/core'
-import { FormsModule } from '@angular/forms';
-//import {UniversalModule, isBrowser} from 'angular2-universal';
 import { routing, appRoutingProviders } from '../../modules/app.routing';
 import {AppService} from "../../modules/app.service";
 import {AppModule} from "../../modules/app.module";
 import {BrowserModule} from "@angular/platform-browser";
-import {Home} from "../home/home.component";
-import {MainModule} from "../../modules/main.module";
 let Constants = require('../../../backend/constants');
 
 declare var $: any;
 
 // Helper component to add dynamic components
 @Component({
-  selector: 'dcl-wrapper-other',
+  selector: 'html-outlet-4',
   template: '<ng-template #target></ng-template>'
 })
 export class HtmlOutlet4 {

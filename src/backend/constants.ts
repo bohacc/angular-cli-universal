@@ -4,7 +4,8 @@ export var COUNTRIES_VERSION = [
   {CODE: 'CZ', URL: 'localhost', numberDigitsRound: 1, assistEmail: 'support@mcled.cz'},
   {CODE: 'CZ', URL: 'new.mcled.cz', numberDigitsRound: 1, assistEmail: 'support@mcled.cz'},
   {CODE: 'CZ', URL: 'test.mcled.cz', numberDigitsRound: 1, assistEmail: 'support@mcled.cz'},
-  {CODE: 'DE', URL: 'at.mcled.cz', numberDigitsRound: 2, assistEmail: 'mcled.support@schmachtl.at'}
+  {CODE: 'DE', URL: 'www.mcled.at', numberDigitsRound: 2, assistEmail: 'mcled.support@schmachtl.at'},
+  {CODE: 'DE', URL: 'mcled.at', numberDigitsRound: 2, assistEmail: 'mcled.support@schmachtl.at'}
 ];
 export var SECURE_FORM_CODE = 'c18d7b974296b9802ac76fad298ffcbe';
 export var CZECH_COUNTRY_CODE = 'CZ';
@@ -110,7 +111,7 @@ export var MESSAGE_CREATE_USER_ERROR = 'Chyba při vytváření uživatele.';
 export var MESSAGE_UPDATE_USER_ERROR = 'Chyba při ukládání uživatele.';
 export var MESSAGE_ERROR_LOST_PASSWORD = 'Chyba při odeslání požadavku.';
 export var MESSAGE_SUCCESS_LOST_PASSWORD = 'Heslo bylo zasláno na Váš email.';
-export var MESSAGE_PASSWORD_NOT_VALID = 'Heslo nemá správný tvar (délka minimálně 8 číslic, 1x velké písmeno, 1x malé písmeno, 1x číslice)';
+export var MESSAGE_PASSWORD_NOT_VALID = 'Heslo nemá správný tvar (délka minimálně 8 znaků, 1x velké písmeno, 1x malé písmeno, 1x číslice)';
 export var B2B_WRONG_WEBSITE = 'Váš uživatelský účet má schválené B2B podmínky pro stát ';
 export var B2B_WRONG_WEBSITE2 = 'Přihlaste se prosím na webu příslušného státu pomocí tohoto odkazu: ';
 export var PRODUCT_ADD_TO_CART_ERROR = 'Chyba při vkládání do košíku';

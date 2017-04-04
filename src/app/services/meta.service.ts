@@ -1,4 +1,3 @@
-//import {isBrowser, isNode} from "angular2-universal";
 import {DOCUMENT} from "@angular/platform-browser";
 import {Inject, Injectable} from "@angular/core";
 import {ApiService} from "./api.service";
@@ -67,9 +66,9 @@ export class MetaService {
     }
   }
 
-  public setMeta () {
+  public setMeta (code: string) {
     if (!this.isBrowser) {
-      this.api.get('/meta')
+      this.api.get('/meta/' + code)
         .subscribe(res => {
           let data: any = res.json();
           this.setMetaItem('description', data.description);

@@ -9,8 +9,6 @@ const { LoaderOptionsPlugin } = require("webpack");
 const { GlobCopyWebpackPlugin, BaseHrefWebpackPlugin } = require("@angular/cli/plugins/webpack");
 const { AotPlugin } = require("@ngtools/webpack");
 
-//var oracledblib = require('oracledb');
-
 module.exports = {
   "devtool": "source-map",
   "resolve": {
@@ -24,7 +22,7 @@ module.exports = {
     "alias": {
       "jqueryUI": "query-ui", //-1.12.0-rc.2
       "jQuery": "jquery",
-      "jquery": "jquery",
+      //"jquery": "jquery",
     }
   },
   "resolveLoader": {
@@ -62,7 +60,7 @@ module.exports = {
         "test": /\.ts$/,
         "loader": "@ngtools/webpack"
       },
-      {
+      /*{
         "exclude": [
           path.join(process.cwd(), "src/styles.css")
         ],
@@ -167,18 +165,19 @@ module.exports = {
           "fallback": "style-loader",
           "publicPath": ""
         })
-      }
+      }*/
     ]
   },
   "plugins": [
     new webpack.ProvidePlugin({
       $: "jquery",
-      jquery: "jQuery",
+      jQuery: "jquery",
+      /*jquery: "jQuery",
       jQuery: "jquery",
       "windows.jQuery": "jquery",
-      'window.$': 'jquery',
+      'window.$': 'jquery',*/
     }),
-    new LoaderOptionsPlugin({
+    /*new LoaderOptionsPlugin({
       "sourceMap": false,
       "options": {
         "postcss": [
@@ -200,8 +199,8 @@ module.exports = {
         },
         "context": ""
       }
-    }),
-    new GlobCopyWebpackPlugin({
+    }),*/
+    /*new GlobCopyWebpackPlugin({
       "patterns": [
         "assets",
         "favicon.ico"
@@ -209,15 +208,15 @@ module.exports = {
       "globOptions": {
         "cwd": "/Users/Owain/angular/angular-cli-universal/src",
         "dot": true,
-        "ignore": "**/.gitkeep"
+        "ignore": "**!/.gitkeep"
       }
-    }),
+    }),*/
     new ProgressPlugin(),
     new BaseHrefWebpackPlugin({}),
-    new ExtractTextPlugin({
+    /*new ExtractTextPlugin({
       "filename": "[name].bundle.css",
       "disable": true
-    })
+    })*/
   ],
   "node": {
     "fs": "empty",

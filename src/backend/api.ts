@@ -23,7 +23,6 @@ export function sessionidCookie (req, res, next) {
         '  encrypt_cookie(seq_sessionid_nbs.nextval) as "sessionid" ' +
         'FROM ' +
         '  dual';
-      //console.log(req);
       Oracledb.select(sql, vals, req, null, null).then(
         function (result) {
           let data: any = Tools.getSingleResult(result);
@@ -32,6 +31,7 @@ export function sessionidCookie (req, res, next) {
           next();
         },
         function (result) {
+          console.log(result);
           next();
         }
       );
@@ -261,8 +261,8 @@ export function getProduct (req, res) {
         data.imgBig1File = data.imgBig1 ? path + (data.imgBig1 || '') + (data.imgBig1Ext || '') : pathEmpty + imgEmptyBig;
 
         // RECOMMENDED PRICE
-        data.currency
-        data.currencyRecommended
+        data.currency;
+        data.currencyRecommended;
         data.priceRecommended = data.priceRecommended;
 
         // PROPERTIES
@@ -305,7 +305,7 @@ export function redirectNavigations (req, res) {
       'SELECT ' +
       '  ID AS "idPage", ' +
       '  \'/\' || PRESMEROVANI as "code", ' +
-      '  NAZEV as "name" ' +
+      '  NAZEV_PRO_NAVIGACI as "name" ' +
       'FROM ' +
       '  WEB_NASTAVENI_WEBU ' +
       'WHERE ' +
@@ -397,7 +397,7 @@ export function redirectNavigationsProduct (req, res) {
 
     sqlArr =
       'select ' +
-      '  nw.nazev as "name", ' +
+      '  nw.nazev_pro_navigaci as "name", ' +
       '  \'/\' || nw.presmerovani as "code" ' +
       'from ' +
       '  web_nastaveni_webu nw ' +
@@ -902,21 +902,25 @@ export function getFilterForList(req, res) {
       '     AND PEPJ.JAZYK = get_param(\'JAZYK_UZIVATELE\') ' +
       '     AND P.ID=Z.ID_PRODUKTU ' +
       '     AND (Z.ID_TYP_ZATRIDENI_PRODUKT,PPP.ID_PREDLOHY) ' +
-      '       IN (SELECT ' +
-      '             ctzp.ID,ctzp.ID_PREDLOHY ' +
-      '           FROM ' +
-      '             crm_typy_zatrideni_produkty ctzp, ' +
-      '             web_nastaveni_webu_zatr_prod nwz, ' +
-      '             web_nastaveni_webu wnw ' +
-      '           WHERE ' +
-      '             ctzp.id = nwz.id_zatrideni ' +
-      '             and wnw.presmerovani = :code ' +
-      '             and wnw.id = nwz.id_nastaveni ' +
-      '           START WITH ctzp.ID = nwz.id_zatrideni CONNECT BY PRIOR ctzp.ID = ctzp.MATKA' +
+      '       IN (select ' +
+      '             id, id_predlohy ' +
+      '           from ' +
+      '             crm_typy_zatrideni_produkty ' +
+      '             start with ' +
+      '               id = (select ' +
+      '                       id_zatrideni ' +
+      '                     from ' +
+      '                       web_nastaveni_webu_zatr_prod nwz, ' +
+      '                       web_nastaveni_webu nw ' +
+      '                     where ' +
+      '                       nw.id = nwz.id_nastaveni ' +
+      '                       and nw.eshop = get_website ' +
+      '                       and nw.presmerovani = :code) ' +
+      '                     connect by prior id = matka ' +
       '           ) ' +
       '     AND PE.PRODUKT = P.KOD ' +
       '     AND PE.PARAMETR = PPP.KOD_PARAM ' +
-      '     AND ((PPP.TYP IN(1,2) AND :type = 2) OR (PPP.TYP IN(41) AND :type = 1)) ' +
+      '     AND ((PPP.TYP IN(1,2,41) AND :type = 2) OR (PPP.TYP IN(41) AND :type = 1)) ' +
       '   ) S ' +
       'GROUP BY ' +
       '  parametr, ' +
@@ -936,7 +940,9 @@ export function getFilterForList(req, res) {
       '  "par" || \':\' || NVL("valx", hodnota) as "id", ' +
       '  "type", ' +
       '  NVL("valx", hodnota) as "val2", ' +
-      '  DECODE("type", 4, DECODE("valx", \'1\', \'Ano\', \'Ne\'), NVL("valx", hodnota)) as "name" ' +
+      '  DECODE("type", 4, DECODE("valx", \'1\', \'Ano\', \'Ne\'), NVL("valx", hodnota)) as "name", ' +
+      '  "sort", ' +
+      '  "idParVal" ' +
       'FROM ' +
       '  (SELECT ' +
       '     s.parametr as "par", ' +
@@ -949,7 +955,9 @@ export function getFilterForList(req, res) {
       '        AND EPVJ.JAZYK = get_param(\'JAZYK_UZIVATELE\') ' +
       '     ) AS "valx", ' +
       '     s.typ as "type", ' +
-      '     s.hodnota ' +
+      '     s.hodnota, ' +
+      '     (SELECT PORADI FROM PRODUKTY_ESHOP_PARAMVALUE WHERE ID = S.ID_PARAMVALUE) as "sort", ' +
+      '     S.ID_PARAMVALUE as "idParVal" ' +
       '   FROM ' +
       '     (SELECT ' +
       '        pe.id_paramvalue, ' +
@@ -980,26 +988,27 @@ export function getFilterForList(req, res) {
       '         ) PE ' +
       '      WHERE ' +
       '        P.KOD=PE.PRODUKT ' +
-      '        AND ((PPP.TYP <> 41 AND PPP.TYP IS NOT NULL AND :type = 2) OR (PPP.TYP IN(41) AND :type = 1)) ' +
-      '        AND (Z.ID_TYP_ZATRIDENI_PRODUKT, PPP.ID_PREDLOHY) ' +
-      '          IN (SELECT ' +
-      '                ctzp.ID, ' +
-      '                ctzp.ID_PREDLOHY ' +
-      '              FROM ' +
-      '                crm_typy_zatrideni_produkty ctzp, ' +
-      '                web_nastaveni_webu_zatr_prod nwz, ' +
-      '                web_nastaveni_webu wnw ' +
-      '              WHERE ' +
-      '                ctzp.id = nwz.id_zatrideni ' +
-      '                and wnw.presmerovani = :code ' +
-      '                and wnw.id = nwz.id_nastaveni ' +
-      '              START WITH ctzp.ID = nwz.id_zatrideni CONNECT BY PRIOR ctzp.ID = ctzp.MATKA ' +
-      '              ) ' +
+      '        AND ((PPP.TYP IN (1,2,41) AND PPP.TYP IS NOT NULL AND :type = 2) OR (PPP.TYP IN(41) AND :type = 1)) ' +
+      '     AND (Z.ID_TYP_ZATRIDENI_PRODUKT,PPP.ID_PREDLOHY) ' +
+      '       IN (select ' +
+      '             id, id_predlohy ' +
+      '           from ' +
+      '             crm_typy_zatrideni_produkty ' +
+      '             start with ' +
+      '               id = (select ' +
+      '                       id_zatrideni ' +
+      '                     from ' +
+      '                       web_nastaveni_webu_zatr_prod nwz, ' +
+      '                       web_nastaveni_webu nw ' +
+      '                     where ' +
+      '                       nw.id = nwz.id_nastaveni ' +
+      '                       and nw.eshop = get_website ' +
+      '                       and nw.presmerovani = :code) ' +
+      '                     connect by prior id = matka ' +
+      '           ) ' +
       '        AND P.ID = Z.ID_PRODUKTU ' +
       '        AND PE.PARAMETR = PPP.KOD_PARAM ' +
       '        AND pep.KOD = pe.parametr ' +
-      //'        AND pepj.KOD_PARAM = pe.parametr ' +
-      //'        AND pepj.JAZYK = get_param(\'JAZYK_UZIVATELE\') ' +
       '     ) S ' +
       '   GROUP BY ' +
       '     typ, ' +
@@ -1007,11 +1016,12 @@ export function getFilterForList(req, res) {
       '     parametr, ' +
       '     hodnota ' +
       '   ORDER BY ' +
-      '     parametr, ' +
-      '     (SELECT PORADI FROM PRODUKTY_ESHOP_PARAMVALUE WHERE ID = S.ID_PARAMVALUE) ' +
+      '     parametr ' +
       '   ) ' +
       'WHERE ' +
-      '  NVL("valx", hodnota) is not null';
+      '  NVL("valx", hodnota) is not null ' +
+      'ORDER BY ' +
+      '  "sort" ';
 
     vals = {code: req.params.code, type: req.params.type};
 
@@ -1040,8 +1050,7 @@ export function getFilterForList(req, res) {
     console.log(e);
     res.send([]);
   }
-};
-
+}
 export function getFilterParams (filtersStr, vals, useWhere, firstAnd, parName, valName) {
   var sqlWhereFilters, index, params;
   sqlWhereFilters = '';
@@ -1632,7 +1641,7 @@ export function xmlExportSeznam (req, res) {
             '<CATEGORYTEXT>'+rows[i].categoryText+'</CATEGORYTEXT>' +
             '</SHOPITEM>';
           obj += temp;
-        };
+        }
         obj += '</SHOP>';
         res.setHeader('Content-Type', 'text/xml');
         res.end(obj);
@@ -1752,7 +1761,7 @@ export function xmlExportHeureka (req, res) {
             '<DELIVERY_DATE>'+rows[i].deliveryDate+'</DELIVERY_DATE>' +
             '</SHOPITEM>';
           obj += temp;
-        };
+        }
         obj += '</SHOP>';
         res.setHeader('Content-Type', 'text/xml');
         res.end(obj);
@@ -1857,7 +1866,7 @@ export function sitemap (req, res) {
             '<lastmod>'+date+'</lastmod>' +
             '</url>';
           obj += temp;
-        };
+        }
         obj += '</urlset>';
         res.setHeader('Content-Type', 'text/xml');
         res.end(obj);
@@ -3079,7 +3088,8 @@ export function saveCurrentUser (req, res) {
 }
 
 export function shipping (req, res) {
-  let sql, vals, sessionid, sqlProps, loginName, valsSessionid, obj: any;
+  let sql, vals, sessionid, sqlProps, loginName, valsSessionid, obj: any, dataParse: any, sqlShippingPaymentLimit,
+    limits, limitsArr, valsLimits;
 
   loginName = Tools.getCookieId(req, Constants.AUTH_TOKEN_CODE);
 
@@ -3103,6 +3113,12 @@ export function shipping (req, res) {
       '  sessionid = decrypt_cookie(:sessionid) ' +
       '  AND kod = \'E1_WEB_UDAJE_DOPR_OBJED_JSON\'';
 
+    sqlShippingPaymentLimit =
+      'SELECT ' +
+      '  WEB_GET_ESHOP_DOP_ZDARMA_ZBYVA(1, decrypt_cookie(:loginName), decrypt_cookie(:sessionid)) as "spj" ' +
+      'FROM ' +
+      '  dual';
+
     vals = {
       strings: {
         type: oracle.STRING,
@@ -3119,6 +3135,11 @@ export function shipping (req, res) {
 
     valsSessionid = {sessionid: sessionid};
 
+    valsLimits = {
+      sessionid: sessionid,
+      loginName: (loginName || '')
+    };
+
     Oracledb.executeSQL(sql, vals, req, null, {commit: true}).then(
       function (result) {
         return Oracledb.select(sqlProps, valsSessionid, req, null, null);
@@ -3128,16 +3149,22 @@ export function shipping (req, res) {
       }
     ).then(
       function (result) {
+        let data: any = Tools.getSingleResult(result);
+        dataParse = (data.result ? JSON.parse(data.result) : {records: []});
+        return Oracledb.select(sqlShippingPaymentLimit, valsLimits, req, null, null);
+      }
+    ).then(
+      function (result) {
+        limits = Tools.getSingleResult(result);
+        limitsArr = JSON.parse('[' + (limits.spj || '') + ']');
         try {
-          let data: any = Tools.getSingleResult(result);
-          let dataParse: any = (data.result ? JSON.parse(data.result) : {records: []});
           obj = {
             records: [],
             priceAmount: decodeURIComponent(dataParse.celkem || ''),
             priceAmountVat: decodeURIComponent(dataParse.celkem_sdph || '')
           };
           dataParse.records.map(function (el) {
-            obj.records.push({
+            let rec = {
               code: decodeURIComponent(el.kod || ''),
               currency: decodeURIComponent(el.mena || ''),
               name: decodeURIComponent(el.nazev || ''),
@@ -3145,7 +3172,9 @@ export function shipping (req, res) {
               priceVat: Tools.roundTo(el.cena_sdph || '', req),
               selected: (el.selected == '1'),
               editable: (el.editovat == '1')
-            });
+            };
+            Tools.addPropsFromArr(rec, limitsArr, 'code', 'doprava');
+            obj.records.push(rec);
           });
           res.json(obj);
         } catch (e) {
@@ -3165,7 +3194,8 @@ export function shipping (req, res) {
 }
 
 export function payment (req, res) {
-  let sql, vals, sessionid, sqlProps, loginName, valsSessionid;
+  let sql, vals, sessionid, sqlProps, loginName, valsSessionid, dataParse: any, limits, limitsArr,
+    sqlShippingPaymentLimit, valsLimits;
 
   loginName = Tools.getCookieId(req, Constants.AUTH_TOKEN_CODE);
 
@@ -3189,6 +3219,12 @@ export function payment (req, res) {
       '  sessionid = decrypt_cookie(:sessionid) ' +
       '  AND kod = \'E1_WEB_UDAJE_PLATBA_OBJED_JSON\'';
 
+    sqlShippingPaymentLimit =
+      'SELECT ' +
+      '  WEB_GET_ESHOP_DOP_ZDARMA_ZBYVA(1, decrypt_cookie(:loginName), decrypt_cookie(:sessionid)) as "spj" ' +
+      'FROM ' +
+      '  dual';
+
     vals = {
       strings: {
         type: oracle.STRING,
@@ -3205,22 +3241,33 @@ export function payment (req, res) {
 
     valsSessionid = {sessionid: sessionid};
 
+    valsLimits = {
+      sessionid: sessionid,
+      loginName: (loginName || '')
+    };
+
     Oracledb.executeSQL(sql, vals, req, null, {commit: true}).then(
       function (result) {
         return Oracledb.select(sqlProps, valsSessionid, req, null, null);
       }
     ).then(
       function (result) {
+        let data: any = Tools.getSingleResult(result);
+        dataParse = (data.result ? JSON.parse(data.result) : {records: []});
+        return Oracledb.select(sqlShippingPaymentLimit, valsLimits, req, null, null);
+      }
+    ).then(
+      function (result) {
         try {
-          let data: any = Tools.getSingleResult(result);
-          let dataParse: any = (data.result ? JSON.parse(data.result) : {records: []});
+          limits = Tools.getSingleResult(result);
+          limitsArr = JSON.parse('[' + (limits.spj || '') + ']');
           let obj = {
             records: [],
             priceAmount: decodeURIComponent(dataParse.celkem),
             priceAmountVat: decodeURIComponent(dataParse.celkem_sdph)
           };
           dataParse.records.map(function (el) {
-            obj.records.push({
+            let rec = {
               code: decodeURIComponent(el.kod),
               currency: decodeURIComponent(el.mena),
               name: decodeURIComponent(el.nazev),
@@ -3228,7 +3275,9 @@ export function payment (req, res) {
               priceVat: Tools.roundTo(el.cena_sdph, req),
               selected: (el.selected == '1'),
               editable: (el.editovat == '1')
-            });
+            };
+            obj.records.push(rec);
+            Tools.addPropsFromArr(rec, limitsArr, 'code', 'platba');
           });
           res.json(obj);
         } catch (e) {
@@ -5046,8 +5095,7 @@ export function getProductParams (req, obj) {
       }
     );
   });
-};
-
+}
 export function getProductPictures (req, obj) {
   return new Promise(function (resolve, reject) {
     let vals, properties, sql, i, arr = [], amount;
@@ -5154,8 +5202,7 @@ export function getProductPictures (req, obj) {
       }
     );
   });
-};
-
+}
 export function language (req, res) {
   res.json({language: req.countryVersion});
 }
@@ -5245,27 +5292,81 @@ export function assistMessage (req, res) {
 }
 
 export function metaTags (req, res) {
-  var sql;
+  var sql, vals;
+  vals = {
+    code: req.params.code
+  };
 
   try {
 
     sql =
-      'select ' +
-      '  get_param(\'WEB_ESHOP_METATAG_DESCRIPTION\', 0, null, USER) as "description", ' +
-      '  get_param(\'WEB_ESHOP_METATAG_KEYWORDS\', 0, null, USER) as "keywords", ' +
-      '  get_param(\'WEB_ESHOP_METATAG_AUTHOR\', 0, null, USER) as "author", ' +
-      '  get_param(\'WEB_ESHOP_METATAG_GENERATOR\', 0, null, USER) as "generator", ' +
-      '  get_param(\'WEB_ESHOP_METATAG_ROBOTS\', 0, null, USER) as "robots", ' +
-      '  get_param(\'WEB_ESHOP_METATAG_HTTPEQUIV\', 0, null, USER) as "contentType", ' +
-      '  get_param(\'WEB_ESHOP_METATAG_PRAGMA\', 0, null, USER) as "pragma", ' +
-      '  get_param(\'WEB_ESHOP_METATAG_CACHE_CONTROL\', 0, null, USER) as "cacheControl", ' +
-      '  get_param(\'WEB_ESHOP_METATAG_EXPIRES\', 0, null, USER) as "expires", ' +
-      '  get_param(\'WEB_ESHOP_METATAG_LANG\', 0, null, USER) as "lang", ' +
-      '  get_param(\'WEB_ESHOP_METATAG_VIEWPORT\', 0, null, USER) as "viewport" ' +
-      'from ' +
-      '  dual';
+      'SELECT ' +
+      '  NVL(b.meta_description,a.description_params) as "description", ' +
+      '  NVL(b.meta_keywords,a.keywords_params) as "keywords", ' +
+      '  a.author as "author", ' +
+      '  a.generator as "generator", ' +
+      '  a.robots as "robots", ' +
+      '  a.contentType as "contentType", ' +
+      '  a.pragma as "pragma", ' +
+      '  a.cacheControl as "cacheControl", ' +
+      '  a.expires as "expires", ' +
+      '  a.lang as "lang", ' +
+      '  a.viewport as "viewport" ' +
+      'FROM ' +
+      ' (SELECT ' +
+      '    get_param(\'WEB_ESHOP_METATAG_DESCRIPTION\', 0, null, USER) as description_params, ' +
+      '    get_param(\'WEB_ESHOP_METATAG_KEYWORDS\', 0, null, USER) as keywords_params, ' +
+      '    get_param(\'WEB_ESHOP_METATAG_AUTHOR\', 0, null, USER) as author, ' +
+      '    get_param(\'WEB_ESHOP_METATAG_GENERATOR\', 0, null, USER) as generator, ' +
+      '    get_param(\'WEB_ESHOP_METATAG_ROBOTS\', 0, null, USER) as robots, ' +
+      '    get_param(\'WEB_ESHOP_METATAG_HTTPEQUIV\', 0, null, USER) as contentType, ' +
+      '    get_param(\'WEB_ESHOP_METATAG_PRAGMA\', 0, null, USER) as pragma, ' +
+      '    get_param(\'WEB_ESHOP_METATAG_CACHE_CONTROL\', 0, null, USER) as cacheControl, ' +
+      '    get_param(\'WEB_ESHOP_METATAG_EXPIRES\', 0, null, USER) as expires, ' +
+      '    get_param(\'WEB_ESHOP_METATAG_LANG\', 0, null, USER) as lang, ' +
+      '    get_param(\'WEB_ESHOP_METATAG_VIEWPORT\', 0, null, USER) as viewport ' +
+      '  FROM ' +
+      '    dual ' +
+      '  ) a, ' +
+      ' (SELECT  ' +
+      '    nw.meta_description, ' +
+      '    nw.meta_keywords ' +
+      '  FROM ' +
+      '    web_redirect re, ' +
+      '    web_nastaveni_webu nw ' +
+      '  WHERE ' +
+      '    re.odkud = \'^\' || :code ||  \'$\' ' +
+      '    and re.tabulka <> \'PRODUKTY\' ' +
+      '    and re.eshop = get_website  ' +
+      '    and nw.eshop = re.eshop ' +
+      '    and nw.id_presmerovani=re.id_presmerovani ' +
+      '  UNION ' +
+      '  SELECT  ' +
+      '    pm.meta_description, ' +
+      '    pm.meta_keywords ' +
+      '  FROM ' +
+      '    web_redirect re, ' +
+      '    web_website_produkt_presmer pp, ' +
+      '    web_website_produkt_metatagy pm ' +
+      '  WHERE ' +
+      '    re.odkud = \'^\' || :code ||  \'$\' ' +
+      '    and re.tabulka = \'PRODUKTY\' ' +
+      '    and re.eshop = get_website  ' +
+      '    and pp.website = re.eshop ' +
+      '    and pm.website = re.eshop ' +
+      '    and pp.id_presmerovani=re.id_presmerovani ' +
+      '    and pp.produkt=pm.produkt ' +
+      '  UNION ' +
+      '  SELECT  ' +
+      '    null, ' +
+      '    null ' +
+      '  FROM ' +
+      '    dual ' +
+      '  ) b ' +
+      'WHERE ' +
+      '  ROWNUM = 1 ';
 
-    Oracledb.select(sql, {}, req, null, null).then(
+    Oracledb.select(sql, vals, req, null, null).then(
       function (result) {
         var data = Tools.getSingleResult(result);
         res.json(data);

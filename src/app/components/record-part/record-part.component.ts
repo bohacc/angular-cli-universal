@@ -17,7 +17,7 @@ export class RecordPart {
   @Input() inConfiguration: Boolean;
   @Output('onScrollToSelect') onScrollToSelect = new EventEmitter();
   @Output('onBuy') onBuy = new EventEmitter();
-  @Output('onOpenAssist') onOpenAssist = new EventEmitter();
+  //@Output('onOpenAssist') onOpenAssist = new EventEmitter();
   @ViewChild(Carousel) carousel: Carousel;
   amount: string;
   inProcess: Boolean = false;

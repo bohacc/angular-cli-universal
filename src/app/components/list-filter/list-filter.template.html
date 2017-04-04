@@ -17,12 +17,16 @@
 </div>
 <div class="content">
   <div class="tab_1 inside"
-       [ngClass]="{opened: tabsState==1, active: tabsState==1, hide: !(tabsState==1)}"
+       *ngIf="tabsState==1"
+       [ngClass]="{opened: tabsState==1, active: tabsState==1}"
+       [isShow]="tabsState==1"
        list-filter-basic
        (onChangeFilter)="onChangeFilterBasic($event)">
   </div>
   <div class="tab_2 inside"
-       [ngClass]="{opened: tabsState==2, active: tabsState==2, hide: !(tabsState==2)}"
+       *ngIf="tabsState==2"
+       [ngClass]="{opened: tabsState==2, active: tabsState==2}"
+       [isShow]="tabsState==2"
        list-filter-advanced
        (onChangeFilter)="onChangeFilterAdvanced($event)">
   </div>

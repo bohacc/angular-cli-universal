@@ -1,94 +1,58 @@
 import {
   Component, Directive, Input, OnInit, ReflectiveInjector, TemplateRef, ViewChild,
-  ViewContainerRef, Compiler
+  ViewContainerRef, Compiler, ComponentFactoryResolver, ComponentRef, OnChanges, OnDestroy, Injector, Type,
+  NgModuleFactory, NgModuleRef, SimpleChanges
 } from '@angular/core';
-import {createComponentFactory} from "@angular/core/src/view";
 
 
-@Directive({
-  selector: "dynamic-html-outlet",
-})
-export class HtmlOutlet implements OnInit {
-  ngOnInit() {
+@Directive({selector: '[htmlOutlet]'})
+export class HtmlOutlet implements OnChanges, OnDestroy {
+  @Input() htmlOutlet: Type<any>;
+  @Input() htmlOutletInjector: Injector;
+  @Input() htmlOutletContent: any[][];
+  @Input() htmlOutletNgModuleFactory: NgModuleFactory<any>;
+  @Input() htmlOutletArgs: any;
 
-  }
-}
-/*
-  // I hold the context that will be exposed to the embedded view.
-  // --
-  // NOTE: The context is an injectable input. However, it's sub-properties are
-  // also individually injectable properties based on the arguments passed to the
-  // factory function.
-  public context: any;
+  private _componentRef: ComponentRef<any> = null;
+  private _moduleRef: NgModuleRef<any> = null;
 
-  // I hold the TemplateRef that we are cloning into the view container.
-  @Input() template: TemplateRef<any>;
+  constructor(private _viewContainerRef: ViewContainerRef) {}
 
-  // I hold the view container into which we are injecting the cloned template.
-  public viewContainerRef: ViewContainerRef;
-
-
-  // I initialize the directive.
-  constructor( viewContainerRef: ViewContainerRef ) {
-
-    this.context = {};
-    this.viewContainerRef = viewContainerRef;
-
-  }
-
-
-  // ---
-  // PUBLIC METHODS.
-  // ---
-
-
-  // I get called once, when the class is initialized, after the inputs have been
-  // bound for the first time.
-  public ngOnInit() : void {
-
-    if ( this.template && this.context ) {
-
-      this.viewContainerRef.createEmbeddedView( this.template, this.context );
-
+  ngOnChanges(changes: SimpleChanges) {
+    if (this._componentRef) {
+      this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._componentRef.hostView));
     }
+    this._viewContainerRef.clear();
+    this._componentRef = null;
 
+    if (this.htmlOutlet) {
+      let injector = this.htmlOutletInjector || this._viewContainerRef.parentInjector;
+
+      if ((changes as any).htmlOutletNgModuleFactory) {
+        if (this._moduleRef) {
+          this._moduleRef.destroy();
+        }
+        if (this.htmlOutletNgModuleFactory) {
+          this._moduleRef = this.htmlOutletNgModuleFactory.create(injector);
+        } else {
+          this._moduleRef = null;
+        }
+      }
+      if (this._moduleRef) {
+        injector = this._moduleRef.injector;
+      }
+
+      let componentFactory =
+        injector.get(ComponentFactoryResolver).resolveComponentFactory(this.htmlOutlet);
+
+      this._componentRef = this._viewContainerRef.createComponent(
+        componentFactory, this._viewContainerRef.length, injector, this.htmlOutletContent);
+      this._componentRef.instance.args = this.htmlOutletArgs || {};
+    }
   }
-
-}
-*/
-
-/*
-@Directive({
-  selector: 'dynamic-html-outlet',
-})
-export class ComponentOutlet {
-  @Input('componentOutlet') private template: string;
-  @Input('componentOutletSelector') private selector: string;
-  @Input('componentOutletContext') private context: Object;
-
-  constructor(private vcRef: ViewContainerRef, private compiler: Compiler) { }
-
-  private _createDynamicComponent() {
-    this.context = this.context || {};
-
-    const metadata = new ComponentMetadata({
-      selector: this.selector,
-      template: this.template,
-    });
-
-    const cmpClass = class _ { };
-    cmpClass.prototype = this.context;
-    return Component(metadata)(cmpClass);
-  }
-
-  ngOnChanges() {
-    if (!this.template) return;
-    this.compiler.compileModuleAndAllComponentsAsync(this._createDynamicComponent())
-      .then(factory => {
-        const injector = ReflectiveInjector.fromResolvedProviders([], this.vcRef.parentInjector);
-        this.vcRef.clear();
-        this.vcRef.createComponent(factory, 0, injector);
-      });
+  ngOnDestroy() {
+    if (this._moduleRef) {
+      this._moduleRef.destroy();
+    }
   }
 }
-*/

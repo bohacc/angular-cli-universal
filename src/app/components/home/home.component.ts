@@ -46,7 +46,7 @@ export class Home implements AfterViewInit {
             // SET TRANSLATE
             this.translate.use(data.language);
             this.metaService.setTitle(data);
-            this.metaService.setMeta();
+            this.metaService.setMeta(code);
             this.objects.content = data.items;
             this.bodyClass = data.items[0] ? data.items[0].bodyClass == 1 : false;
             this.appService.setPageId(data.items[0] ? data.items[0].idPage : null);
@@ -59,7 +59,6 @@ export class Home implements AfterViewInit {
           });
       this.appService.setPath(code);
     });
-    this.appService.refreshWidth();
   }
 
   ngAfterViewInit() {

@@ -67,33 +67,33 @@
               <!-- ///// -->
               <div class="item row va-middle">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
-                  <label class="label" [ngClass]="{required: isAustria}">{{'Firma' | translate}}:</label>
+                  <label class="label" [ngClass]="{required: store.isAustria}">{{'Firma' | translate}}:</label>
                 </div>
                 <div class="col-xs-12 col-lg-5">
                   <div class="input">
-                    <input type="text" name="company[name]" [(ngModel)]="user.companyName" [required]="isAustria || user.toCompany" />
+                    <input type="text" name="company[name]" [(ngModel)]="user.companyName" [required]="store.isAustria || user.toCompany" />
                   </div>
                 </div>
               </div>
               <!-- ///// -->
               <div class="item row va-middle">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
-                  <label class="label" [ngClass]="{required: isAustria || user.conditions}">{{'IČ' | translate}}:</label>
+                  <label class="label" [ngClass]="{required: store.isAustria || user.conditions}">{{'IČ' | translate}}:</label>
                 </div>
                 <div class="col-xs-12 col-lg-5">
                   <div class="input">
-                    <input type="text" name="company[ic]" [(ngModel)]="user.regId" [required]="isAustria || (user.toCompany && user.conditions)" [placeholder]="placeholderRegId" />
+                    <input type="text" name="company[ic]" [(ngModel)]="user.regId" [required]="store.isAustria || (user.toCompany && user.conditions)" [placeholder]="placeholderRegId" />
                   </div>
                 </div>
               </div>
               <!-- ///// -->
               <div class="item row va-middle">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3">
-                  <label class="label" [ngClass]="{required: isAustria || user.conditions}">{{'DIČ' | translate}}:</label>
+                  <label class="label" [ngClass]="{required: store.isAustria || user.conditions}">{{'DIČ' | translate}}:</label>
                 </div>
                 <div class="col-xs-12 col-lg-5">
                   <div class="input">
-                    <input type="text" name="company[dic]" [(ngModel)]="user.vatId" [required]="isAustria || (user.toCompany && user.conditions)" [placeholder]="placeholderVatId" />
+                    <input type="text" name="company[dic]" [(ngModel)]="user.vatId" [required]="store.isAustria || (user.toCompany && user.conditions)" [placeholder]="placeholderVatId" />
                   </div>
                 </div>
               </div>
@@ -400,7 +400,12 @@
         <!-- ///// -->
         <!-- ///// -->
         <div class="item row va-middle" *ngIf="type==1">
-          <div class="col-12">
+          <div class="spinner" *ngIf="inProcess">
+            <span>
+              <img src="/images/loader.gif" />
+            </span>
+          </div>
+          <div class="col-12" *ngIf="!inProcess">
             <button type="submit" class="lui_button warning" *ngIf="!user.isLogged" [disabled]="inProcess">{{'Registrovat' | translate}}</button>
             <button type="submit" class="lui_button warning" *ngIf="user.isLogged" [disabled]="inProcess">{{'Uložit' | translate}}</button>
             <div class="required_label_info inline">{{'Položky označené' | translate}} <span>*</span> {{'je nutné vyplnit' | translate}}</div>

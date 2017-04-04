@@ -164,7 +164,8 @@
     <!--END HIDE FOR AUSTRIA-->
     <div class="free_delivery">
       <span *ngFor="let item of cartObj.shippingAndPaymentLimits">
-        {{'Do dopravy' | translate}} <strong>{{'ZDARMA' | translate}}</strong> {{'zbývá' | translate}} <span class="remain">{{item.left | number:formatNumber1}} {{cartObj.currency}}</span>
+        <span *ngIf="item.splneno=='0'">{{'Do dopravy' | translate}} <strong>{{'ZDARMA' | translate}}</strong> {{'zbývá' | translate}} <span class="remain">{{item.left | number:formatNumber1}} {{cartObj.currency}}</span></span>
+        <span *ngIf="item.splneno=='1'">{{'Doprava ZDARMA' | translate}}</span>
       </span>
     </div>
   </div>

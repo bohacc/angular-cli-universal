@@ -29,9 +29,11 @@
         <div class="row a-center va-top">
           <div class="col-xs-12 col-xl-4" *ngFor="let prop of product.properties">
             <p>
-              <span *ngFor="let item of prop.items">{{item.paramName}}: <strong>{{item.val}}&nbsp;{{item.oddVal2}}&nbsp;{{item.val2}}</strong><br /></span>
+              <span *ngFor="let item of prop.items">{{item.paramName}}: <strong>{{item.val | translate}}&nbsp;{{item.oddVal2 | translate}}&nbsp;{{item.val2 | translate}}</strong><br /></span>
             </p>
           </div>
+          <div class="col-xs-12 col-xl-4" *ngIf="product.properties && [1,2].indexOf(product.properties.length % 3) > -1"></div>
+          <div class="col-xs-12 col-xl-4" *ngIf="product.properties && [1].indexOf(product.properties.length % 3) > -1"></div>
         </div>
       </div>
     </div>

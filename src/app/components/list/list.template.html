@@ -2,6 +2,7 @@
     <!-- SHOP FILTER --> <!--in_tab only list 2-->
     <div *ngIf="asListType !== 0" class="shop_filter" [ngClass]="{'in_tab': asListType == 2}" list-filter
          [meta]="meta"
+         (onResetFilter)="onResetFilter()"
          (onChangeFilterBasic)="onChangeFilterBasic($event)"
          (onChangeFilterAdvanced)="onChangeFilterAdvanced($event)">
     </div>

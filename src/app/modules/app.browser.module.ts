@@ -11,7 +11,6 @@ import { MainComponent } from '../components/main/main.component';
     BrowserModule.withServerTransition({
         appId: 'cli-universal'
     }),
-    //BrowserTransferStateModule,
     AppModule
   ],
   bootstrap: [

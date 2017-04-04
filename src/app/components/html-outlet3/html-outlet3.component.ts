@@ -3,7 +3,7 @@ import { NgModule, Component, Compiler, ViewContainerRef, ViewChild, Input, Comp
 
 // Helper component to add dynamic components
 @Component({
-  selector: 'dcl-wrapper',
+  selector: 'html-outlet-3',
   template: `<div #target [innerHTML]="html"></div>`
 })
 export class HtmlOutlet3 {
@@ -12,15 +12,15 @@ export class HtmlOutlet3 {
   @Input() html;
   @Input() args;
   cmpRef: ComponentRef<any>;
-  private isViewInitialized:boolean = false;
+  private isViewInitialized: boolean = false;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private compiler: Compiler) {}
 
   updateComponent() {
-    if(!this.isViewInitialized) {
+    if (!this.isViewInitialized) {
       return;
     }
-    if(this.cmpRef) {
+    if (this.cmpRef) {
       this.cmpRef.destroy();
     }
 
@@ -40,7 +40,7 @@ export class HtmlOutlet3 {
   }
 
   ngOnDestroy() {
-    if(this.cmpRef) {
+    if (this.cmpRef) {
       this.cmpRef.destroy();
     }
   }

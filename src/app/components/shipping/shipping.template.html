@@ -12,14 +12,14 @@
           {{item.name | translate}} <span class="info" title="{{item.name}}"></span>
         </div>
         <!--PRICE WITHOUT VAR FOR AT-->
-        <div class="price" *ngIf="item.priceVat && item.priceVat!='0' && store.isAustria">
+        <div class="price" *ngIf="item.priceVat > 0 && store.isAustria && item.splneno != '1'">
           {{item.price | number:formatNumber1}} {{item.currency}}
         </div>
         <!--PRICE-->
-        <div class="price" *ngIf="item.priceVat && item.priceVat!='0' && !store.isAustria">
+        <div class="price" *ngIf="item.priceVat > 0 && !store.isAustria && item.splneno != '1'">
           {{item.priceVat | number:formatNumber1}} {{item.currency}}
         </div>
-        <div class="price" *ngIf="!item.priceVat || item.priceVat=='0'">
+        <div class="price" *ngIf="!item.priceVat || item.splneno == '1'">
           {{'zdarma' | translate}}
         </div>
       </div>
