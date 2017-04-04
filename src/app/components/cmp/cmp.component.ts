@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 
 @Component({
   selector: 'cmp',
-  template: ''
+  templateUrl: 'cmp.template.html'
 })
 
 export class Cmp {

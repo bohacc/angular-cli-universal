@@ -24,13 +24,19 @@ import {RegistrationSuccess} from "../registration-success/registration-success.
 import {RegistrationPage} from "../registration-page/registration-page.component";
 import {SearchResultList} from "../search-result-list/search-result-list.component";
 import {ProductsHomepage} from "../products-homepage/products-homepage.component";
-import {Http} from "@angular/http";
+import {Http, HttpModule} from "@angular/http";
 import {PageHeaderAt} from "../page-header-at/page-header-at.component";
 import {LoginNewsletter} from "../login-newsletter/login-newsletter.component";
 import {List5Obj} from "../list5-obj/list5-obj.component";
 import {LostPassword} from "../lost-password/lost-password.component";
 import {Tools} from "../../../backend/tools";
 import {Cmp} from "../cmp/cmp.component";
+import {BrowserModule} from "@angular/platform-browser";
+import {FormsModule} from "@angular/forms";
+import {RouterModule} from "@angular/router";
+import {DynamicComponentModule} from "angular2-dynamic-component";
+import {CommonModule} from "@angular/common";
+import {routing} from "../../modules/app.routing";
 
 @Component({
   selector: 'section-object',
@@ -41,9 +47,6 @@ import {Cmp} from "../cmp/cmp.component";
     '<div *ngIf="isComponentType==1">' +
     '  <dcl-wrapper-other [html]="html" [args]="args"></dcl-wrapper-other>' +
     '</div>'
-    /*'<dynamic-html-outlet *ngIf="isComponentType==1" [html]="html"></dynamic-html-outlet>'*/
-    /*'<dcl-wrapper *ngIf="isComponentType==2" [type]="obj" [html]="html" [args]="args"></dcl-wrapper> '*/
-    /*'<dcl-wrapper-other *ngIf="isComponentType==1" [html]="html" [args]="args"></dcl-wrapper-other>'*/
 })
 
 export class SectionObject {
@@ -60,6 +63,13 @@ export class SectionObject {
   self = this;
   obj: any;
   isComponentType: number = 0;
+  selfx = this;
+  dynamicModules: [
+    CommonModule,
+    FormsModule,
+    HttpModule,
+    BrowserModule
+    ];
 
   constructor(private http: Http, private appService: AppService) {
 

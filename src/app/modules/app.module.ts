@@ -108,6 +108,9 @@ import {HtmlOutlet} from "../components/html-outlet/html-outlet.component";
 import {Cmp} from "../components/cmp/cmp.component";
 import {ToolsService} from "../services/tools.service";
 import {AppService} from "./app.service";
+import {MainModule} from "./main.module";
+import {DynamicComponentModule, DynamicComponentModuleFactory} from "angular2-dynamic-component";
+import {BrowserModule} from "@angular/platform-browser";
 
 @NgModule({
   declarations: [
@@ -246,7 +249,8 @@ import {AppService} from "./app.service";
     CommonModule,
     FormsModule,
     HttpModule,
-    routing
+    routing,
+    DynamicComponentModule
   ],
   providers: [
     appRoutingProviders,

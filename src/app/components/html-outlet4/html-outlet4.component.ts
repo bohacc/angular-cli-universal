@@ -9,6 +9,8 @@ import { routing, appRoutingProviders } from '../../modules/app.routing';
 import {AppService} from "../../modules/app.service";
 import {AppModule} from "../../modules/app.module";
 import {BrowserModule} from "@angular/platform-browser";
+import {Home} from "../home/home.component";
+import {MainModule} from "../../modules/main.module";
 let Constants = require('../../../backend/constants');
 
 declare var $: any;
@@ -16,7 +18,7 @@ declare var $: any;
 // Helper component to add dynamic components
 @Component({
   selector: 'dcl-wrapper-other',
-  template: `<ng-template #target></ng-template>`
+  template: '<ng-template #target></ng-template>'
 })
 export class HtmlOutlet4 {
   @ViewChild('target', {read: ViewContainerRef}) target;
@@ -107,7 +109,7 @@ export class HtmlOutlet4 {
       ],
       imports: [
         BrowserModule,
-        FormsModule,
+        //FormsModule,
         routing,
         AppModule
       ],
@@ -131,7 +133,7 @@ export class HtmlOutlet4 {
     this.updateComponent();
   }
 
-  ngAfterViewChecked() {
+  ngOnInit() {
     this.isViewInitialized = true;
     this.updateComponent();
   }
