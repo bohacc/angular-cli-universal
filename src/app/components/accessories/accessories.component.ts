@@ -17,6 +17,7 @@ export class Accessories {
   constructor() {
     this.formatNumber1 = Constants.FORMAT_NUMBER_1;
     this.formatNumber2 = Constants.FORMAT_NUMBER_2;
+    //
   }
 
   plus(item: any) {

@@ -64,9 +64,9 @@ module.exports = {
     new CommonsChunkPlugin({
       "name": "vendor",
       "minChunks": (module) => module.resource && module.resource.startsWith(nodeModules),
-      "chunks";: [
+      "chunks": [
         "main"
-      ];
+      ]
     })
   ]
 }
